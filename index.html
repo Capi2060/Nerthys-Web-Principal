@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nerthys Network - Servidor de Minecraft 1.16 - 1.21</title>
+    <!-- Fonts and Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/logoprincipal.png">
+</head>
+
+<body>
+
+    <!-- Navbar Container (Loaded via JS) -->
+    <div id="navbar-container"></div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content container">
+            <img src="assets/logoprincipal.png" alt="Nerthys Network Logo" class="hero-logo">
+            <h1 class="hero-title">Explora el Universo</h1>
+            <p class="hero-subtitle">Survival Custom • 1.16 - 1.21 • Java & Bedrock</p>
+
+            <div class="ip-box" onclick="copyIP()">
+                <i class="fa-solid fa-gamepad ip-icon"></i>
+                <div class="ip-details">
+                    <span class="ip-label"
+                        style="display:block; font-size: 0.8rem; color: var(--primary-yellow); text-align: left;">IP DEL
+                        SERVIDOR</span>
+                    <span class="ip-text">MC.NERTHYS.NET</span>
+                </div>
+                <i class="fa-regular fa-copy" style="margin-left: 10px; opacity: 0.7;"></i>
+            </div>
+
+            <div class="hero-buttons">
+                <a href="https://tienda.nerthys.net" target="_blank" class="btn btn-primary">Tienda</a>
+                <a href="https://discord.gg/nerthys" target="_blank" class="btn btn-secondary">Discord</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- News Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Últimas Noticias</h2>
+            <div class="grid" id="news-grid">
+                <!-- News items injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" style="background: rgba(255,255,255,0.02);">
+        <div class="container">
+            <h2 class="section-title">¿Por qué Nerthys?</h2>
+            <div class="grid">
+                <div class="card">
+                    <div style="font-size: 2.5rem; color: var(--primary-yellow); margin-bottom: 20px;">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3>Economía Espacial</h3>
+                    <p>Un sistema de economía único y justo. ¡Consigue infinidad de dinero y domina el
+                        mercado!</p>
+                </div>
+                <div class="card">
+                    <div style="font-size: 2.5rem; color: var(--primary-yellow); margin-bottom: 20px;">
+                        <i class="fa-brands fa-android"></i>
+                    </div>
+                    <h3>Java y Bedrock</h3>
+                    <p>Juega con tus amigos sin importar la plataforma. Soporte completo cross-play para todas las
+                        versiones recientes.</p>
+                </div>
+                <div class="card">
+                    <div style="font-size: 2.5rem; color: var(--primary-yellow); margin-bottom: 20px;">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3>Protección Avanzada</h3>
+                    <p>Tus construcciones están seguras con nuestros sistemas de protección de última generación. Juega
+                        tranquilo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container (Loaded via JS) -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+</body>
+
+</html>

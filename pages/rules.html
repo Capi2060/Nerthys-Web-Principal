@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reglas - Nerthys Network</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" href="../assets/logoprincipal.png">
+    <style>
+        .rule-category {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .rule-category h2 {
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .rule-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .rule-list li::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary-yellow);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-container"></div>
+
+    <header class="section" style="padding-top: 150px; text-align: center;">
+        <div class="container">
+            <h1 class="hero-title" style="font-size: 3rem;">Reglas del Servidor</h1>
+            <p class="hero-subtitle">El desconocimiento de las normas no exime de su cumplimiento.</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container" style="max-width: 900px;">
+
+            <div class="rule-category">
+                <h2><i class="fa-solid fa-comments"></i> Comportamiento y Chat</h2>
+                <ul class="rule-list">
+                    <li>Se debe mantener el respeto entre todos los usuarios. Los insultos graves, racismo, homofobia o
+                        cualquier tipo de discriminación están prohibidos.</li>
+                    <li>No hagas spam de IPs de otros servidores, links sospechosos o flood en el chat global.</li>
+                    <li>No pidas rangos, items o creativo al Staff. Ellos están para moderar, no para dar ventajas.</li>
+                </ul>
+            </div>
+
+            <div class="rule-category">
+                <h2><i class="fa-solid fa-gamepad"></i> Jugabilidad</h2>
+                <ul class="rule-list">
+                    <li>El uso de Hacks, Clientes modificados (que den ventaja) o Mods ilegales está terminantemente
+                        prohibido. (X-Ray, Fly, KillAura, etc.)</li>
+                    <li>No abusar de Bugs o Glitches. Si encuentras uno, repórtalo inmediatamente al Staff para recibir
+                        una recompensa.</li>
+                    <li>El Griefing (destruir construcciones ajenas) está prohibido en zonas protegidas. En zonas no
+                        protegidas es responsabilidad del usuario.</li>
+                    <li>No se permite el TPA Kill (pedir tp para matar) engañando al usuario.</li>
+                </ul>
+            </div>
+
+            <div class="rule-category">
+                <h2><i class="fa-solid fa-gavel"></i> Sanciones</h2>
+                <p>El Staff se reserva el derecho de sancionar a cualquier usuario que considere tóxico o perjudicial
+                    para la comunidad, incluso si la infracción no está especificada en esta lista.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+    <script src="../main.js"></script>
+</body>
+
+</html>
