@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff - Nerthys Network</title>
+    <title>Equipo - Nerthys Network</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" type="image/png" href="../assets/logoprincipal.png">
@@ -15,123 +15,166 @@
 
     <header class="section" style="padding-top: 150px; text-align: center;">
         <div class="container">
-            <h1 class="hero-title" style="font-size: 3rem;">Nuestro Equipo</h1>
-            <p class="hero-subtitle">Las personas que hacen posible este universo.</p>
+            <h1 class="hero-title" style="font-size: 3.5rem;">Nuestro Equipo</h1>
+            <p class="hero-subtitle">Los arquitectos y guardianes del universo Nerthys.</p>
         </div>
     </header>
 
-    <section class="section">
+    <section class="section" style="padding-top: 20px;">
         <div class="container">
 
-            <!-- Sección de Owners (Dueños) -->
-            <h2 class="section-title" style="margin-bottom: 30px;">Owners</h2>
-            <div class="grid"
-                style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); justify-content: center; margin-bottom: 80px;">
-
+            <!-- Dueños -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Dueños</h2>
+            </div>
+            <div class="staff-grid-centered">
                 <div class="card staff-card">
-                    <!-- Avatar por defecto, el JS luego pone la skin real si tenemos el nombre -->
-                    <img src="https://mc-heads.net/avatar/CAPII_MC/120" alt="CAPII_MC" class="staff-avatar"
-                        onerror="this.src='../assets/logoprincipal.png'">
-                    <h3 style="margin-bottom: 5px;">CAPII_MC</h3>
-                    <span class="staff-role" style="background: #FF5555; color: white;">Owner</span>
+                    <img src="https://mc-heads.net/avatar/CAPII_MC/120" alt="CAPII_MC" class="staff-avatar">
+                    <h3 class="staff-name">CAPII_MC</h3>
+                    <span class="role-badge role-owner-capi">Dueño</span>
                 </div>
 
                 <div class="card staff-card">
-                    <img src="https://mc-heads.net/avatar/1El_Adrii/120" alt="1El_Adrii" class="staff-avatar"
-                        onerror="this.src='../assets/logoprincipal.png'">
-                    <h3 style="margin-bottom: 5px;">1El_Adrii</h3>
-                    <span class="staff-role" style="background: #FF5555; color: white;">Owner</span>
+                    <img src="https://mc-heads.net/avatar/1El_Adrii/120" alt="1El_Adrii" class="staff-avatar">
+                    <h3 class="staff-name">1El_Adrii</h3>
+                    <span class="role-badge role-owner-adri">Dueño</span>
                 </div>
 
                 <div class="card staff-card">
-                    <img src="https://mc-heads.net/avatar/Erik_1128/120" alt="Erik_1128" class="staff-avatar"
-                        onerror="this.src='../assets/logoprincipal.png'">
-                    <h3 style="margin-bottom: 5px;">Erik_1128</h3>
-                    <span class="staff-role" style="background: #FF5555; color: white;">Owner</span>
+                    <img src="https://mc-heads.net/avatar/Erik_1128/120" alt="Erik_1128" class="staff-avatar">
+                    <h3 class="staff-name">Erik_1128</h3>
+                    <span class="role-badge role-owner-erik">Dueño</span>
                 </div>
-
             </div>
 
+            <!-- Separador -->
+            <hr
+                style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0)); margin-bottom: 60px;">
+
             <!-- Managers -->
-            <h2 class="section-title" style="margin-bottom: 30px;">Managers</h2>
-            <div class="grid"
-                style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); justify-content: center; margin-bottom: 60px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Managers</h2>
+            </div>
+            <div class="staff-grid-centered">
                 <div class="card staff-card">
-                    <img src="https://mc-heads.net/avatar/MHF_Steve/120" alt="Steve" class="staff-avatar">
-                    <h3 style="margin-bottom: 5px;">Vacante</h3>
-                    <span class="staff-role" style="background: #AA0000; color: white;">Manager</span>
+                    <img src="https://mc-heads.net/avatar/MHF_Steve/100" alt="Steve" class="staff-avatar"
+                        style="filter: grayscale(1);">
+                    <h3 class="staff-name" style="font-size: 1.2rem; color: #aaa;">Vacante</h3>
+                    <span class="role-badge role-manager">Manager</span>
                 </div>
             </div>
 
             <!-- Admins -->
-            <h2 class="section-title" style="margin-bottom: 30px;">Admins</h2>
-            <div class="grid"
-                style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); justify-content: center; margin-bottom: 60px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Admins</h2>
+            </div>
+            <div class="staff-grid-centered">
                 <div class="card staff-card">
-                    <img src="https://mc-heads.net/avatar/MHF_Steve/120" alt="Steve" class="staff-avatar">
-                    <h3 style="margin-bottom: 5px;">Vacante</h3>
-                    <span class="staff-role" style="background: #FF0000; color: white;">Admin</span>
+                    <img src="https://mc-heads.net/avatar/MHF_Steve/100" alt="Steve" class="staff-avatar"
+                        style="filter: grayscale(1);">
+                    <h3 class="staff-name" style="font-size: 1.2rem; color: #aaa;">Vacante</h3>
+                    <span class="role-badge role-admin">Admin</span>
                 </div>
             </div>
 
-            <!-- Jr Jr Admins -->
-            <h2 class="section-title" style="margin-bottom: 30px;">Jr Admins</h2>
-            <div class="grid"
-                style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); justify-content: center; margin-bottom: 60px;">
+            <!-- Jr Admins -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Jr Admins</h2>
+            </div>
+            <div class="staff-grid-centered">
                 <div class="card staff-card">
-                    <img src="https://mc-heads.net/avatar/MHF_Steve/120" alt="Steve" class="staff-avatar">
-                    <h3 style="margin-bottom: 5px;">Vacante</h3>
-                    <span class="staff-role" style="background: #FFAA00; color: white;">JrAdmin</span>
+                    <img src="https://mc-heads.net/avatar/MHF_Steve/100" alt="Steve" class="staff-avatar"
+                        style="filter: grayscale(1);">
+                    <h3 class="staff-name" style="font-size: 1.2rem; color: #aaa;">Vacante</h3>
+                    <span class="role-badge role-jradmin">Jr. Admin</span>
                 </div>
             </div>
 
-            <!-- SrMods -->
-            <h2 class="section-title" style="margin-bottom: 30px;">Sr Mods</h2>
-            <div class="grid"
-                style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); justify-content: center; margin-bottom: 60px;">
+            <!-- Separador -->
+            <hr
+                style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0)); margin-bottom: 60px;">
+
+            <!-- Sr Mods -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Sr Mods</h2>
+            </div>
+            <div class="staff-grid-centered">
                 <div class="card staff-card">
-                    <img src="https://mc-heads.net/avatar/MHF_Steve/120" alt="Steve" class="staff-avatar">
-                    <h3 style="margin-bottom: 5px;">Vacante</h3>
-                    <span class="staff-role" style="background: #FFFF55; color: #333;">SrMod</span>
+                    <img src="https://mc-heads.net/avatar/MHF_Steve/100" alt="Steve" class="staff-avatar"
+                        style="filter: grayscale(1);">
+                    <h3 class="staff-name" style="font-size: 1.2rem; color: #aaa;">Vacante</h3>
+                    <span class="role-badge role-srmod">Sr. Mod</span>
                 </div>
             </div>
 
             <!-- Mods -->
-            <h2 class="section-title" style="margin-bottom: 30px;">Mods</h2>
-            <div class="grid"
-                style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); justify-content: center; margin-bottom: 60px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Mods</h2>
+            </div>
+            <div class="staff-grid-centered">
                 <div class="card staff-card">
-                    <img src="https://mc-heads.net/avatar/MHF_Steve/120" alt="Steve" class="staff-avatar">
-                    <h3 style="margin-bottom: 5px;">Vacante</h3>
-                    <span class="staff-role" style="background: #006400; color: white;">Mod</span>
+                    <img src="https://mc-heads.net/avatar/MHF_Steve/100" alt="Steve" class="staff-avatar"
+                        style="filter: grayscale(1);">
+                    <h3 class="staff-name" style="font-size: 1.2rem; color: #aaa;">Vacante</h3>
+                    <span class="role-badge role-mod">Mod</span>
                 </div>
             </div>
 
-            <!-- JrMods -->
-            <h2 class="section-title" style="margin-bottom: 30px;">Jr Mods</h2>
-            <div class="grid"
-                style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); justify-content: center; margin-bottom: 60px;">
+            <!-- Jr Mods -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Jr Mods</h2>
+            </div>
+            <div class="staff-grid-centered">
                 <div class="card staff-card">
-                    <img src="https://mc-heads.net/avatar/MHF_Steve/120" alt="Steve" class="staff-avatar">
-                    <h3 style="margin-bottom: 5px;">Vacante</h3>
-                    <span class="staff-role" style="background: #00FF00; color: #333;">JrMod</span>
+                    <img src="https://mc-heads.net/avatar/MHF_Steve/100" alt="Steve" class="staff-avatar"
+                        style="filter: grayscale(1);">
+                    <h3 class="staff-name" style="font-size: 1.2rem; color: #aaa;">Vacante</h3>
+                    <span class="role-badge role-jrmod">Jr. Mod</span>
                 </div>
             </div>
 
             <!-- Ayudantes -->
-            <h2 class="section-title" style="margin-bottom: 30px;">Ayudantes</h2>
-            <div class="grid"
-                style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); justify-content: center; margin-bottom: 60px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title">Ayudantes</h2>
+            </div>
+            <div class="staff-grid-centered">
                 <div class="card staff-card">
-                    <img src="https://mc-heads.net/avatar/MHF_Steve/120" alt="Steve" class="staff-avatar">
-                    <h3 style="margin-bottom: 5px;">Vacante</h3>
-                    <span class="staff-role" style="background: #0000FF; color: white;">Ayudante</span>
+                    <img src="https://mc-heads.net/avatar/MHF_Steve/100" alt="Steve" class="staff-avatar"
+                        style="filter: grayscale(1);">
+                    <h3 class="staff-name" style="font-size: 1.2rem; color: #aaa;">Vacante</h3>
+                    <span class="role-badge role-ayudante">Ayudante</span>
+                </div>
+            </div>
+
+            <!-- Separador -->
+            <div
+                style="margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+                <h2 class="section-title" style="color: #ff55ff; text-shadow: 0 0 20px rgba(255, 85, 255, 0.4);">💖 Top
+                    Donadores</h2>
+                <p style="color: var(--text-dim); margin-bottom: 40px;">Gracias a ellos Nerthys Network sigue en pie.
+                </p>
+            </div>
+            <div class="staff-grid-centered">
+                <div class="card staff-card"
+                    style="border-color: #ff55ff; box-shadow: 0 0 30px rgba(255, 85, 255, 0.15);">
+                    <img src="https://mc-heads.net/avatar/MHF_Alex/100" alt="Donador" class="staff-avatar"
+                        style="border-color: #ff55ff;">
+                    <h3 class="staff-name">Anónimo</h3>
+                    <span class="role-badge role-donator">VIP+</span>
+                </div>
+                <div class="card staff-card"
+                    style="border-color: #ff55ff; box-shadow: 0 0 30px rgba(255, 85, 255, 0.15);">
+                    <img src="https://mc-heads.net/avatar/MHF_Alex/100" alt="Donador" class="staff-avatar"
+                        style="border-color: #ff55ff;">
+                    <h3 class="staff-name">Anónimo</h3>
+                    <span class="role-badge role-donator">MVP</span>
                 </div>
             </div>
 
         </div>
     </section>
 
+    <!-- Footer -->
     <div id="footer-container"></div>
     <script src="../main.js"></script>
 </body>

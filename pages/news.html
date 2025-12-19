@@ -17,68 +17,615 @@
             margin-top: 50px;
         }
 
-        /* Destacada Principal */
+        /* --- FEATURED CARD IMPROVEMENT --- */
         .news-card-featured {
             grid-column: 1 / -1;
             display: flex;
             align-items: center;
-            background: linear-gradient(145deg, rgba(255, 215, 0, 0.08) 0%, rgba(10, 10, 20, 0.8) 100%);
+            /* Center vertically */
+            justify-content: center;
+            /* Center horizontally if content is small */
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(10, 10, 20, 0.98));
             border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 20px;
-            min-height: 450px;
+            min-height: 500px;
             position: relative;
             overflow: hidden;
-            transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            padding: 40px;
         }
 
         .news-card-featured:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.15);
+            transform: translateY(-5px) scale(1.005);
+            box-shadow: 0 25px 60px rgba(255, 215, 0, 0.15);
             border-color: rgba(255, 215, 0, 0.6);
         }
 
-        /* Efecto de brillo en fondo */
-        .news-card-featured::after {
+        .news-card-featured::before {
             content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            width: 50%;
+            left: 0;
+            width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 70% 50%, rgba(255, 215, 0, 0.1), transparent 70%);
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(43, 196, 255, 0.05) 0%, transparent 20%);
+            z-index: 1;
             pointer-events: none;
         }
 
         .news-card-featured .news-content {
-            padding: 60px;
-            text-align: left;
+            position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
+            text-align: center;
+            /* Centered content as requested */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
+        .news-card-featured .news-tag {
+            margin-bottom: 25px;
+        }
+
+        .news-card-featured .news-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #ffffff, #aaaaaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            line-height: 1.1;
+        }
+
+        .news-card-featured .news-excerpt {
+            font-size: 1.3rem;
+            color: #ccc;
+            max-width: 700px;
+            margin-bottom: 35px;
+        }
+
+        /* --- BADGE SYSTEM VARIABLES --- */
+        /* --- BADGE SYSTEM EXTENDED (20 Styles x 10 Colors) --- */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 20;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: none;
+        }
+
+        .badge:hover {
+            transform: scale(1.1) rotate(-1deg);
+            z-index: 30;
+        }
+
+        /* --- 1. NEON (Glows) - FORCED SPECIFICITY --- */
+        .badge-neon-red {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 2px solid #ff4d4d !important;
+            color: #ff4d4d !important;
+            box-shadow: 0 0 10px #ff4d4d !important;
+            animation: pulse-neon-red 2s infinite;
+        }
+
+        .badge-neon-blue {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 2px solid #4d94ff !important;
+            color: #4d94ff !important;
+            box-shadow: 0 0 10px #4d94ff !important;
+            animation: pulse-neon-blue 2s infinite;
+        }
+
+        .badge-neon-green {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 2px solid #4dff88 !important;
+            color: #4dff88 !important;
+            box-shadow: 0 0 10px #4dff88 !important;
+            animation: pulse-neon-green 2s infinite;
+        }
+
+        .badge-neon-yellow {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 2px solid #ffff4d !important;
+            color: #ffff4d !important;
+            box-shadow: 0 0 10px #ffff4d !important;
+            animation: pulse-neon-yellow 2s infinite;
+        }
+
+        .badge-neon-purple {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 2px solid #bf4dff !important;
+            color: #bf4dff !important;
+            box-shadow: 0 0 10px #bf4dff !important;
+            animation: pulse-neon-purple 2s infinite;
+        }
+
+        .badge-neon-pink {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 2px solid #ff4dbf !important;
+            color: #ff4dbf !important;
+            box-shadow: 0 0 10px #ff4dbf !important;
+            animation: pulse-neon-pink 2s infinite;
+        }
+
+        .badge-neon-orange {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 2px solid #ff944d !important;
+            color: #ff944d !important;
+            box-shadow: 0 0 10px #ff944d !important;
+            animation: pulse-neon-orange 2s infinite;
+        }
+
+        .badge-neon-cyan {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 2px solid #4dffff !important;
+            color: #4dffff !important;
+            box-shadow: 0 0 10px #4dffff !important;
+            animation: pulse-neon-cyan 2s infinite;
+        }
+
+        .badge-neon-gold {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 2px solid #ffd700 !important;
+            color: #ffd700 !important;
+            box-shadow: 0 0 10px #ffd700 !important;
+            animation: pulse-neon-gold 2s infinite;
+        }
+
+        .badge-neon-white {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 2px solid #ffffff !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 10px #ffffff !important;
+            animation: pulse-neon-white 2s infinite;
+        }
+
+        @keyframes pulse-neon-red {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px #ff4d4d, inset 0 0 5px #ff4d4d;
+            }
+
+            50% {
+                box-shadow: 0 0 20px #ff4d4d, inset 0 0 10px #ff4d4d;
+            }
+        }
+
+        @keyframes pulse-neon-yellow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px #ffff4d;
+            }
+
+            50% {
+                box-shadow: 0 0 20px #ffff4d;
+            }
+        }
+
+        /* (Simplified keyframes via reuse possible but clearer for user to see explicit blocks) */
+
+        /* --- 2. GLASS (Transparent) --- */
+        .glass-base {
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge-glass-red {
+            background: rgba(255, 0, 0, 0.15) !important;
+            color: #ffcccc !important;
+            border-color: rgba(255, 0, 0, 0.3) !important;
+        }
+
+        .badge-glass-blue {
+            background: rgba(0, 100, 255, 0.15) !important;
+            color: #cceeff !important;
+            border-color: rgba(0, 100, 255, 0.3) !important;
+        }
+
+        .badge-glass-green {
+            background: rgba(0, 255, 100, 0.15) !important;
+            color: #ccffdd !important;
+            border-color: rgba(0, 255, 100, 0.3) !important;
+        }
+
+        .badge-glass-yellow {
+            background: rgba(255, 255, 0, 0.15) !important;
+            color: #ffffcc !important;
+            border-color: rgba(255, 255, 0, 0.3) !important;
+        }
+
+        .badge-glass-purple {
+            background: rgba(200, 0, 255, 0.15) !important;
+            color: #eebbff !important;
+            border-color: rgba(200, 0, 255, 0.3) !important;
+        }
+
+        .badge-glass-pink {
+            background: rgba(255, 0, 200, 0.15) !important;
+            color: #ffccff !important;
+            border-color: rgba(255, 0, 200, 0.3) !important;
+        }
+
+        .badge-glass-orange {
+            background: rgba(255, 100, 0, 0.15) !important;
+            color: #ffddcc !important;
+            border-color: rgba(255, 100, 0, 0.3) !important;
+        }
+
+        .badge-glass-cyan {
+            background: rgba(0, 255, 255, 0.15) !important;
+            color: #ccffff !important;
+            border-color: rgba(0, 255, 255, 0.3) !important;
+        }
+
+        .badge-glass-gold {
+            background: rgba(255, 215, 0, 0.15) !important;
+            color: #fffacc !important;
+            border-color: rgba(255, 215, 0, 0.3) !important;
+        }
+
+        .badge-glass-white {
+            background: rgba(255, 255, 255, 0.10) !important;
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+
+        /* --- 3. GRADIENT (Vibrant) --- */
+        .badge-grad-sunset {
+            background: linear-gradient(45deg, #ff512f, #dd2476) !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .badge-grad-ocean {
+            background: linear-gradient(45deg, #2193b0, #6dd5ed) !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .badge-grad-forest {
+            background: linear-gradient(45deg, #11998e, #38ef7d) !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .badge-grad-royal {
+            background: linear-gradient(45deg, #834d9b, #d04ed6) !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .badge-grad-fire {
+            background: linear-gradient(45deg, #f12711, #f5af19) !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .badge-grad-night {
+            background: linear-gradient(45deg, #0f2027, #2c5364) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .badge-grad-lemon {
+            background: linear-gradient(45deg, #FDC830, #F37335) !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .badge-grad-berry {
+            background: linear-gradient(45deg, #e52d27, #b31217) !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .badge-grad-teal {
+            background: linear-gradient(45deg, #1D976C, #93F9B9) !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .badge-grad-gold {
+            background: linear-gradient(45deg, #bf953f, #fcf6ba, #bf953f) !important;
+            color: #4a3b00 !important;
+            border: 1px solid #b38728 !important;
+        }
+
+        /* --- 4. COSMIC (Animated Space) --- */
+        .badge-cosmic {
+            background: linear-gradient(270deg, #642b73, #c6426e, #642b73) !important;
+            background-size: 600% 600% !important;
+            color: #fff !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            animation: cosmic-anim 10s ease infinite;
+        }
+
+        @keyframes cosmic-anim {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+        .badge-cosmic-blue {
+            background: linear-gradient(270deg, #000428, #004e92, #000428) !important;
+            background-size: 600% !important;
+            animation: cosmic-anim 10s ease infinite;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        }
+
+        .badge-cosmic-red {
+            background: linear-gradient(270deg, #870000, #190a05, #870000) !important;
+            background-size: 600% !important;
+            animation: cosmic-anim 10s ease infinite;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        }
+
+        .badge-cosmic-gold {
+            background: linear-gradient(270deg, #332800, #8a7000, #332800) !important;
+            background-size: 600% !important;
+            animation: cosmic-anim 10s ease infinite;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        }
+
+        /* --- 5. GLITCH (Cyberpunk) --- */
+        .badge-glitch {
+            background: #222 !important;
+            color: #aff !important;
+            border: 1px solid #aff !important;
+            position: relative;
+        }
+
+        .badge-glitch::before {
+            content: attr(data-text);
+            position: absolute;
+            left: -2px;
+            text-shadow: 1px 0 #ff00c1;
+            top: 0;
+            background: #222;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+
+        .badge-glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -1px 0 #00fff9;
+            top: 0;
+            background: #222;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% {
+                clip: rect(20px, 9999px, 30px, 0);
+            }
+
+            20% {
+                clip: rect(40px, 9999px, 10px, 0);
+            }
+
+            40% {
+                clip: rect(50px, 9999px, 5px, 0);
+            }
+
+            60% {
+                clip: rect(10px, 9999px, 80px, 0);
+            }
+
+            80% {
+                clip: rect(60px, 9999px, 20px, 0);
+            }
+
+            100% {
+                clip: rect(30px, 9999px, 60px, 0);
+            }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% {
+                clip: rect(10px, 9999px, 80px, 0);
+            }
+
+            20% {
+                clip: rect(60px, 9999px, 10px, 0);
+            }
+
+            40% {
+                clip: rect(30px, 9999px, 50px, 0);
+            }
+
+            60% {
+                clip: rect(60px, 9999px, 40px, 0);
+            }
+
+            80% {
+                clip: rect(10px, 9999px, 20px, 0);
+            }
+
+            100% {
+                clip: rect(50px, 9999px, 30px, 0);
+            }
+        }
+
+        /* --- 6. METALLIC (Shiny) --- */
+        .badge-metal-silver {
+            background: linear-gradient(to bottom, #f2f2f2 0%, #d4d4d4 50%, #aaaaaa 51%, #f2f2f2 100%) !important;
+            color: #333 !important;
+            border: 1px solid #999 !important;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .badge-metal-gold {
+            background: linear-gradient(to bottom, #fce3a2 0%, #d6a13d 50%, #a47622 51%, #fce3a2 100%) !important;
+            color: #432 !important;
+            border: 1px solid #a47622 !important;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .badge-metal-copper {
+            background: linear-gradient(to bottom, #f5c0a2 0%, #d6815d 50%, #a4502f 51%, #f5c0a2 100%) !important;
+            color: #310 !important;
+            border: 1px solid #a4502f !important;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        /* --- 7. FIRE (Animated Burn) --- */
+        .badge-fire {
+            background: #ff5500 !important;
+            color: #400000 !important;
+            box-shadow: 0 0 10px #ff5500, 0 0 20px #ffaa00 !important;
+            animation: fire-flicker 0.1s infinite alternate;
+            border: 1px solid #ffcc00 !important;
+        }
+
+        @keyframes fire-flicker {
+            0% {
+                opacity: 0.9;
+                box-shadow: 0 0 10px #ff5500;
+            }
+
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 15px #ffcc00;
+            }
+        }
+
+        /* --- 8. FROSTED (Ice) --- */
+        .badge-frosted-ice {
+            background: rgba(200, 240, 255, 0.2) !important;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.6) !important;
+            color: #e0f7fa !important;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        /* --- 9. OUTLINE (Minimal) --- */
+        .badge-outline-red {
+            background: transparent !important;
+            border: 2px solid #ff4d4d !important;
+            color: #ff4d4d !important;
+        }
+
+        .badge-outline-blue {
+            background: transparent !important;
+            border: 2px solid #4d94ff !important;
+            color: #4d94ff !important;
+        }
+
+        .badge-outline-gold {
+            background: transparent !important;
+            border: 2px solid #ffd700 !important;
+            color: #ffd700 !important;
+        }
+
+        .badge-outline-white {
+            background: transparent !important;
+            border: 2px solid #fff !important;
+            color: #fff !important;
+        }
+
+        /* --- 10. SOLID (Flat) --- */
+        .badge-solid-red {
+            background: #ff4d4d !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .badge-solid-blue {
+            background: #4d94ff !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .badge-solid-black {
+            background: #000 !important;
+            color: white !important;
+            border: 1px solid #333 !important;
+        }
+
+        /* --- 11. HOLOGRAPHIC --- */
+        .badge-holo {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.1) 100%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            color: #fff !important;
+            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: hue-rotate(90deg);
+            /* Static effect base */
+        }
+
+        .badge-holo:hover {
+            animation: holo-shift 2s infinite;
+        }
+
+        @keyframes holo-shift {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        /* End of badge styles */
 
         /* Tarjetas Normales */
         .news-card {
-            background: rgba(20, 20, 30, 0.6);
-            border: 1px solid var(--glass-border);
+            background: linear-gradient(145deg, rgba(30, 30, 45, 0.9) 0%, rgba(20, 20, 30, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 35px;
-            transition: 0.4s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             text-align: left;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            /* Stronger shadow for depth */
+            height: 100%;
+            /* Ensure full height in grid */
         }
 
         .news-card:hover {
-            background: rgba(255, 255, 255, 0.03);
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 215, 0, 0.4);
+            background: linear-gradient(145deg, rgba(35, 35, 50, 0.95) 0%, rgba(25, 25, 35, 1) 100%);
         }
 
         .news-card::before {
@@ -87,14 +634,24 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
+            height: 3px;
             background: var(--gradient-gold);
-            opacity: 0;
+            opacity: 0.5;
+            /* Always slightly visible */
             transition: 0.3s;
         }
 
         .news-card:hover::before {
             opacity: 1;
+            height: 4px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Make sure generic badges inside cards have space */
+        .news-card .badge {
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            /* Pop out badges too */
         }
 
         /* Typography & Elements */
@@ -112,12 +669,139 @@
             display: inline-block;
         }
 
-        .news-card-featured .news-tag {
-            background: var(--primary-yellow);
-            color: #000;
-            border: none;
-            padding: 8px 20px;
+        .news-card-featured .badge {
+            /* Layout & Position ONLY - Styles come from specific classes */
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            margin: 0;
+            z-index: 10;
         }
+
+        .news-date {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 5px 12px;
+            border-radius: 8px;
+            display: inline-flex;
+            /* Compact date pill */
+        }
+
+        .news-title {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .news-card-featured .news-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #ffffff, #aaaaaa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            line-height: 1.1;
+        }
+
+        .news-excerpt {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .news-card-featured .news-excerpt {
+            font-size: 1.3rem;
+            color: #ccc;
+            max-width: 700px;
+            margin-bottom: 35px;
+        }
+
+        .read-more-link {
+            margin-top: auto;
+            color: var(--primary-yellow);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .read-more-link:hover {
+            color: #fff;
+            transform: translateX(5px);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .news-card-featured {
+                flex-direction: column;
+                padding: 30px;
+                min-height: auto;
+                text-align: left;
+            }
+
+            .news-card-featured .news-content {
+                align-items: center;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Holographic Badge */
+        .badge-holographic {
+            background: linear-gradient(-45deg, rgba(59, 130, 246, 0.3), rgba(147, 51, 234, 0.3), rgba(236, 72, 153, 0.3), rgba(59, 130, 246, 0.3));
+            background-size: 400% 400%;
+            animation: gradient-anim 3s ease infinite;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+        }
+
+        @keyframes gradient-anim {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Frosted Badge */
+        .badge-frosted {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ddd;
+            backdrop-filter: blur(15px);
+        }
+
+        .badge-frosted:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Generic News Card Adjustments for Badges */
+        .news-card .badge {
+            margin-bottom: 20px;
+        }
+
 
         .news-date {
             color: #888;
@@ -137,24 +821,11 @@
             line-height: 1.2;
         }
 
-        .news-card-featured .news-title {
-            font-size: 3rem;
-            background: linear-gradient(to right, #fff, #ccc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
         .news-excerpt {
             color: var(--text-dim);
             line-height: 1.6;
             margin-bottom: 25px;
             font-size: 0.95rem;
-        }
-
-        .news-card-featured .news-excerpt {
-            font-size: 1.2rem;
-            color: #ddd;
-            max-width: 600px;
         }
 
         .read-more-link {
@@ -174,13 +845,14 @@
 
         @media (max-width: 768px) {
             .news-card-featured {
-                flex-direction: column;
                 padding: 30px;
                 min-height: auto;
+                text-align: left;
             }
 
             .news-card-featured .news-content {
-                padding: 0;
+                align-items: center;
+                /* Still center generally, or left if prefer */
             }
 
             .news-grid {
@@ -188,11 +860,11 @@
             }
 
             .news-card-featured .news-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
         }
 
-        /* --- MODAL STYLES --- */
+        /* --- MODAL STYLES (REVAMPED) --- */
         .modal {
             display: none;
             position: fixed;
@@ -201,119 +873,222 @@
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
+            overflow: hidden;
+            /* Evita scroll doble */
+            background-color: rgba(5, 5, 10, 0.85);
+            backdrop-filter: blur(12px);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            align-items: center;
+            justify-content: center;
         }
 
         .modal.show {
-            display: block;
+            display: flex;
+            /* Centrado perfecto */
             opacity: 1;
         }
 
         .modal-content {
-            background: linear-gradient(145deg, rgba(20, 20, 30, 0.95) 0%, rgba(10, 10, 20, 0.98) 100%);
-            margin: 5% auto;
-            padding: 0;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            width: 80%;
-            max-width: 900px;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(180deg, rgba(25, 25, 35, 1) 0%, rgba(15, 15, 20, 1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 850px;
+            /* Un poco mas estrecho para lectura optima */
+            max-height: 90vh;
+            /* Maximo alto de pantalla */
+            border-radius: 24px;
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
             position: relative;
-            transform: translateY(50px);
+            transform: scale(0.9) translateY(30px);
             opacity: 0;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            /* Elastic Bounce */
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
         }
 
         .modal.show .modal-content {
-            transform: translateY(0);
+            transform: scale(1) translateY(0);
             opacity: 1;
         }
 
+        /* Hero Header */
         .modal-header {
-            padding: 40px 40px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(255, 215, 0, 0.02);
+            padding: 50px 40px;
+            background: linear-gradient(135deg, rgba(25, 25, 35, 1), rgba(40, 40, 60, 0)),
+                url('https://www.transparenttextures.com/patterns/stardust.png'),
+                /* Textura sutil si carga, sino gradiente */
+                linear-gradient(to right, #1a1a2e, #16213e);
             position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            flex-shrink: 0;
+            /* No encoger header */
+            overflow: hidden;
+        }
+
+        /* Glow effect top */
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         .close-modal {
-            color: #aaa;
             position: absolute;
             top: 20px;
-            right: 25px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 40px;
-            height: 40px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .close-modal:hover,
-        .close-modal:focus {
-            color: var(--primary-yellow);
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(90deg);
+        .close-modal:hover {
+            background: var(--primary-yellow);
+            color: #000;
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
         }
 
+        /* Content Scrollable Area */
         .modal-body {
             padding: 40px;
-            color: #ddd;
-            font-size: 1.05rem;
+            color: #dadada;
+            font-size: 1.1rem;
             line-height: 1.8;
-            max-height: 70vh;
             overflow-y: auto;
+            /* Scroll solo aqui */
+            background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.02), transparent 40%);
         }
 
+        /* Typography improvements */
+        .modal-header .news-tag {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header .news-title {
+            font-size: 2.8rem;
+            /* Titulo grande */
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+        }
+
+        .modal-header .news-date {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+
+        /* Body Formatting */
         .modal-body h3 {
             color: var(--primary-yellow);
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-            border-left: 3px solid var(--primary-yellow);
-            padding-left: 15px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .modal-body h3::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-yellow);
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--primary-yellow);
         }
 
         .modal-body p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .modal-body ul {
-            margin-bottom: 20px;
-            padding-left: 20px;
-            list-style-type: disc;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 30px 30px 30px 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 30px;
         }
 
         .modal-body li {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .modal-body strong {
+            color: #fff;
+            font-weight: 700;
         }
 
         /* Scrollbar bonito para el modal */
         .modal-body::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         .modal-body::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            margin: 10px;
+            border-radius: 10px;
         }
 
         .modal-body::-webkit-scrollbar-thumb {
-            background: rgba(255, 215, 0, 0.3);
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0);
+            /* Fake border for padding */
+            background-clip: padding-box;
         }
 
         .modal-body::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 215, 0, 0.5);
+            background: rgba(255, 215, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 100%;
+                height: 100%;
+                max-height: 100vh;
+                border-radius: 0;
+                border: none;
+            }
+
+            .modal-header {
+                padding: 30px 20px;
+            }
+
+            .modal-header .news-title {
+                font-size: 2rem;
+            }
+
+            .close-modal {
+                top: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>

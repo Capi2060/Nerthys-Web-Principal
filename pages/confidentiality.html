@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confidencialidad - Nerthys Network</title>
+    <!-- Fuentes e Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Mis Estilos CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" href="../assets/logoprincipal.png">
+    <style>
+        .terms-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .term-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .term-item:last-child {
+            border-bottom: none;
+        }
+
+        .term-title {
+            font-size: 1.4rem;
+            color: var(--primary-yellow);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .term-text {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .term-text strong {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+
+    <header class="hero" style="min-height: 40vh; padding-top: 150px;">
+        <div class="container">
+            <h1 class="hero-title">Términos de Confidencialidad</h1>
+            <p class="hero-subtitle">Acuerdo de No Divulgación (NDA) para postulantes</p>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="terms-container">
+
+                <div class="term-item">
+                    <h3 class="term-title"><i class="fa-solid fa-file-contract"></i> 1. Naturaleza del Acuerdo</h3>
+                    <p class="term-text">
+                        Al enviar una solicitud para formar parte del equipo administrativo (Staff) de <strong>Nerthys
+                            Network</strong>, aceptas automáticamente los términos expuestos en este documento. Este
+                        acuerdo es vinculante y su incumplimiento conlleva consecuencias inmediatas dentro y fuera de la
+                        plataforma (<strong>Discord</strong> y <strong>Minecraft</strong>).
+                    </p>
+                </div>
+
+                <div class="term-item">
+                    <h3 class="term-title"><i class="fa-solid fa-user-secret"></i> 2. Información Sensible</h3>
+                    <p class="term-text">
+                        Como miembro potencial o activo del Staff, tendrás acceso a información privilegiada, incluyendo
+                        pero no limitado a:
+                    </p>
+                    <ul
+                        style="list-style: disc; margin-left: 20px; color: var(--text-dim); margin-top: 10px; line-height: 1.6;">
+                        <li>Plugins privados y configuraciones internas del servidor.</li>
+                        <li>Canales de comunicación internos (Discord Staff, logs, consolas).</li>
+                        <li>Estrategias de marketing y próximas actualizaciones no anunciadas.</li>
+                        <li>Datos de jugadores (IPs, historiales de sanciones, etc.).</li>
+                    </ul>
+                </div>
+
+                <div class="term-item">
+                    <h3 class="term-title"><i class="fa-solid fa-ban"></i> 3. Prohibición de Divulgación (Leaks)</h3>
+                    <p class="term-text">
+                        Queda <strong>estrictamente prohibido</strong> compartir, filtrar, vender o publicar cualquier
+                        información interna mencionada en el punto 2. Esto incluye capturas de pantalla de chats de
+                        staff, configuraciones de plugins o cualquier material exclusivo de Nerthys hacia personas
+                        ajenas al equipo administrativo.
+                        <br><br>
+                        Esta prohibición se mantiene <strong>indefinidamente</strong>, incluso después de abandonar o
+                        ser expulsado del equipo.
+                    </p>
+                </div>
+
+                <div class="term-item">
+                    <h3 class="term-title"><i class="fa-solid fa-gavel"></i> 4. Consecuencias del Incumplimiento</h3>
+                    <p class="term-text">
+                        La violación de estos términos resultará en:
+                    </p>
+                    <ul
+                        style="list-style: disc; margin-left: 20px; color: var(--text-dim); margin-top: 10px; line-height: 1.6;">
+                        <li><strong>Expulsión Inmediata (Blacklist):</strong> Bloqueo permanente de Nerthys Network y
+                            todas sus plataformas.</li>
+                        <li><strong>Reporte Público:</strong> Inclusión en listas negras de comunidades de servidores
+                            (MCBans, etc.) por "Leaking".</li>
+                        <li><strong>Acciones Legales:</strong> En casos graves de robo de propiedad intelectual o daño a
+                            la infraestructura.</li>
+                    </ul>
+                </div>
+
+                <div class="term-item">
+                    <h3 class="term-title"><i class="fa-solid fa-handshake"></i> 5. Aceptación</h3>
+                    <p class="term-text">
+                        Al pulsar el botón "Enviar" o "Aplicar" en nuestros formularios, confirmas que has leído,
+                        entendido y aceptado cumplir con este acuerdo de confidencialidad en su totalidad.
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="apply.html" class="btn btn-primary">Volver a Postulaciones</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script src="../main.js"></script>
+</body>
+
+</html>

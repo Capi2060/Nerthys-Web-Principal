@@ -279,6 +279,44 @@ window.copyIP = function () {
 
 // --- Cargador de Noticias (News Page) ---
 
+/*
+ * LISTA DE ESTILOS PARA BADGES (Etiquetas de Noticias)
+ * Usa estas clases en la propiedad "badgeClass" de cada noticia:
+ *
+ * 1. NEON (Pulsante):
+ *    badge-neon-red, badge-neon-blue, badge-neon-green, badge-neon-yellow,
+ *    badge-neon-purple, badge-neon-pink, badge-neon-orange, badge-neon-cyan,
+ *    badge-neon-gold, badge-neon-white
+ *
+ * 2. GLASS (Transparente/Vidrio):
+ *    badge-glass-red, badge-glass-blue, badge-glass-green, badge-glass-yellow,
+ *    badge-glass-purple, badge-glass-pink, badge-glass-orange, badge-glass-cyan,
+ *    badge-glass-gold, badge-glass-white
+ *
+ * 3. GRADIENT (Degradados Vibrantes):
+ *    badge-grad-sunset, badge-grad-ocean, badge-grad-forest, badge-grad-royal,
+ *    badge-grad-fire, badge-grad-night, badge-grad-lemon, badge-grad-berry,
+ *    badge-grad-teal, badge-grad-gold
+ *
+ * 4. COSMIC (Espacial Animado):
+ *    badge-cosmic (Morado/Rosa), badge-cosmic-blue, badge-cosmic-red, badge-cosmic-gold
+ *
+ * 5. METAL (Metálico Brillante):
+ *    badge-metal-silver, badge-metal-gold, badge-metal-copper
+ *
+ * 6. OTROS ESTILOS:
+ *    badge-fire (Efecto Fuego Animado)
+ *    badge-glitch (Efecto Cyberpunk)
+ *    badge-frosted-ice (Efecto Hielo)
+ *    badge-holo (Holográfico)
+ *
+ * 7. OUTLINE (Borde Simple):
+ *    badge-outline-red, badge-outline-blue, badge-outline-gold, badge-outline-white
+ *
+ * 8. SOLID (Color Plano):
+ *    badge-solid-red, badge-solid-blue, badge-solid-black
+ */
+
 function loadNews() {
     const newsGrid = document.getElementById('news-grid-container');
     if (!newsGrid) return; // Si no estoy en la página de noticias, me salgo
@@ -290,6 +328,7 @@ function loadNews() {
             excerpt: "Tras meses de desarrollo, estamos orgullosos de abrir las puertas de Nerthys Network. ¡Únete ya!",
             icon: "fa-rocket",
             tag: "Importante",
+            badgeClass: "badge badge-neon-yellow",
             featured: true,
             content: `
                 <p>¡Saludos, aventureros estelares!</p>
@@ -319,78 +358,52 @@ function loadNews() {
                 <p><em>- El Equipo Administrativo de Nerthys</em></p>
             `
         },
-        {
-            title: "Actualización de Navidad",
-            date: "25 Diciembre, 2024",
-            excerpt: "El lobby se ha decorado y hay nuevos eventos navideños disponibles por tiempo limitado.",
-            icon: "fa-snowflake",
-            tag: "Evento",
-            featured: false,
-            content: `
-                <p>¡Felices Fiestas, comunidad!</p>
-                <p>La Navidad ha llegado a Nerthys Network y el espíritu festivo se ha apoderado de nuestro Lobby y del mundo Survival.</p>
+        // {
+        //     title: "Actualización de Navidad",
+        //     date: "25 Diciembre, 2025",
+        //     excerpt: "El lobby se ha decorado y hay nuevos eventos navideños disponibles por tiempo limitado.",
+        //     icon: "fa-snowflake",
+        //     tag: "Evento",
+        //     badgeClass: "badge badge-cosmic-blue",
+        //     featured: false,
+        //     content: `
+        //         <p>¡Felices Fiestas, comunidad!</p>
+        //         <p>La Navidad ha llegado a Nerthys Network y el espíritu festivo se ha apoderado de nuestro Lobby y del mundo Survival.</p>
 
-                <h3>🎅 Novedades Navideñas</h3>
-                <ul>
-                    <li><strong>Lobby Invernal:</strong> Hemos cubierto el lobby de nieve y decoraciones mágicas. ¡Busca los regalos ocultos!</li>
-                    <li><strong>Calendario de Adviento:</strong> Usa <code>/adviento</code> cada día para reclamar una recompensa gratuita.</li>
-                    <li><strong>Caja Navideña:</strong> Una nueva caja de loot limitada con cosméticos exclusivos de elfo, reno y Santa.</li>
-                </ul>
+        //         <h3>🎅 Novedades Navideñas</h3>
+        //         <ul>
+        //             <li><strong>Lobby Invernal:</strong> Hemos cubierto el lobby de nieve y decoraciones mágicas. ¡Busca los regalos ocultos!</li>
+        //             <li><strong>Calendario de Adviento:</strong> Usa <code>/adviento</code> cada día para reclamar una recompensa gratuita.</li>
+        //             <li><strong>Caja Navideña:</strong> Una nueva caja de loot limitada con cosméticos exclusivos de elfo, reno y Santa.</li>
+        //         </ul>
 
-                <p>El evento estará activo hasta el 7 de Enero. ¡No te pierdas los regalos diarios!</p>
-            `
-        },
-        {
-            title: "Nuevo Rango Astronauta",
-            date: "01 Enero, 2025",
-            excerpt: "Descubre las ventajas exclusivas del nuevo rango disponible en la tienda.",
-            icon: "fa-user-astronaut",
-            tag: "Tienda",
-            featured: false,
-            content: `
-                <p>¡Alcanza las estrellas con el nuevo rango <strong>ASTRONAUTA</strong>!</p>
-                <p>Hemos escuchado sus sugerencias y hemos creado un nuevo rango intermedio en nuestra tienda, diseñado para ofrecer las mejores utilidades sin romper el balance del juego.</p>
+        //         <p>El evento estará activo hasta el 7 de Enero. ¡No te pierdas los regalos diarios!</p>
+        //     `
+        // },
+        // {
+        //     title: "Nuevo Rango ",
+        //     date: "01 Enero, 2025",
+        //     excerpt: "Descubre las ventajas exclusivas del nuevo rango disponible en la tienda.",
+        //     icon: "fa-user-astronaut",
+        //     tag: "Tienda",
+        //     badgeClass: "badge badge-metal-gold",
+        //     featured: false,
+        //     content: `
+        //         <p>¡Alcanza las estrellas con el nuevo rango <strong>ASTRONAUTA</strong>!</p>
+        //         <p>Hemos escuchado sus sugerencias y hemos creado un nuevo rango intermedio en nuestra tienda, diseñado para ofrecer las mejores utilidades sin romper el balance del juego.</p>
 
-                <h3>💎 Beneficios Destacados</h3>
-                <ul>
-                    <li>Acceso al comando <code>/fly</code> en tus protecciones.</li>
-                    <li>Kit Astronauta (Reclamable cada 3 días).</li>
-                    <li>Acceso a 3 homes adicionales.</li>
-                    <li>Color de chat exclusivo: <strong>Azul Galáctico</strong>.</li>
-                    <li>Prioridad en la cola de entrada.</li>
-                </ul>
+        //         <h3>💎 Beneficios Destacados</h3>
+        //         <ul>
+        //             <li>Acceso al comando <code>/fly</code> en tus protecciones.</li>
+        //             <li>Kit Astronauta (Reclamable cada 3 días).</li>
+        //             <li>Acceso a 3 homes adicionales.</li>
+        //             <li>Color de chat exclusivo: <strong>Azul Galáctico</strong>.</li>
+        //             <li>Prioridad en la cola de entrada.</li>
+        //         </ul>
 
-                <p>Adquiérelo ya en <a href="https://tienda.nerthys.net" target="_blank" style="color: var(--primary-yellow);">tienda.nerthys.net</a> con un <strong>20% de descuento</strong> de lanzamiento.</p>
-            `
-        },
-        {
-            title: "Torneo PVP: Edición 1",
-            date: "10 Febrero, 2025",
-            excerpt: "Apúntate al primer torneo oficial de PVP y gana premios metálicos.",
-            icon: "fa-trophy",
-            tag: "Torneo",
-            featured: false,
-            content: `
-                <p>¿Crees que eres el mejor en combate? ¡Demuéstralo!</p>
-                <p>Anunciamos oficialmente la <strong>Primera Edición del Torneo PVP de Nerthys</strong>. Un evento donde la habilidad es lo único que importa.</p>
-
-                <h3>⚔️ Detalles del Torneo</h3>
-                <ul>
-                    <li><strong>Fecha:</strong> 10 de Febrero, 2025</li>
-                    <li><strong>Hora:</strong> 20:00 (Hora España)</li>
-                    <li><strong>Modalidad:</strong> Crystal PVP (Kit Default)</li>
-                    <li><strong>Premios:</strong>
-                        <ul>
-                            <li>🥇 1º Puesto: 20€ PayPal + Rango Permanente</li>
-                            <li>🥈 2º Puesto: 10€ Tienda</li>
-                            <li>🥉 3º Puesto: 5€ Tienda</li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <p>Las inscripciones abren mañana en nuestro Discord. ¡Plazas limitadas!</p>
-            `
-        }
+        //         <p>Adquiérelo ya en <a href="https://tienda.nerthys.net" target="_blank" style="color: var(--primary-yellow);">tienda.nerthys.net</a> con un <strong>20% de descuento</strong> de lanzamiento.</p>
+        //     `
+        // },
     ];
 
     newsGrid.innerHTML = '';
@@ -402,8 +415,8 @@ function loadNews() {
         if (index === 0 && news.featured) {
             article.className = 'news-card-featured';
             article.innerHTML = `
+                <span class="${news.badgeClass}" data-text="${news.tag}">${news.tag}</span>
                 <div class="news-content">
-                    <span class="news-tag">${news.tag}</span>
                     <h2 class="news-title">${news.title}</h2>
                     <div class="news-date"><i class="fa-regular fa-calendar"></i> ${news.date}</div>
                     <p class="news-excerpt">${news.excerpt}</p>
@@ -417,7 +430,7 @@ function loadNews() {
         else {
             article.className = 'news-card';
             article.innerHTML = `
-                <span class="news-tag">${news.tag}</span>
+                <span class="${news.badgeClass}" data-text="${news.tag}">${news.tag}</span>
                 <div class="news-date"><i class="fa-regular fa-calendar"></i> ${news.date}</div>
                 <h3 class="news-title"><i class="fa-solid ${news.icon}" style="color: var(--primary-yellow); font-size: 0.8em; margin-right: 8px;"></i>${news.title}</h3>
                 <p class="news-excerpt">${news.excerpt}</p>
@@ -445,7 +458,10 @@ function openNewsModal(news) {
     if (!modal) return;
 
     // Rellenar datos
-    document.getElementById('modal-tag').textContent = news.tag;
+    const tagEl = document.getElementById('modal-tag');
+    tagEl.textContent = news.tag;
+    tagEl.className = news.badgeClass || 'news-tag'; // Fallback
+
     document.getElementById('modal-title').textContent = news.title;
     document.getElementById('modal-date').innerHTML = `<i class="fa-regular fa-calendar"></i> ${news.date}`;
     document.getElementById('modal-body-content').innerHTML = news.content;
