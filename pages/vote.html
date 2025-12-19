@@ -13,47 +13,53 @@
 <body>
     <div id="navbar-container"></div>
 
-    <header class="section" style="padding-top: 150px; text-align: center;">
-        <div class="container">
-            <h1 class="hero-title" style="font-size: 3rem;">Vota por el Servidor</h1>
-            <p class="hero-subtitle">¡Ayúdanos a crecer y recibe recompensas increíbles!</p>
+    <header class="hero" style="min-height: 50vh; padding-top: 150px;">
+        <div class="container mobile-pad">
+            <h1 class="hero-title">Votar por el Servidor</h1>
+            <p class="hero-subtitle">Vota diariamente para recibir llaves y premios exclusivos dentro del juego.</p>
         </div>
     </header>
 
-    <section class="section">
-        <div class="container" style="max-width: 800px;">
-            <!-- Vote Links -->
-            <a href="#" target="_blank" class="vote-item">
-                <div class="vote-info">
-                    <h3><i class="fa-solid fa-check-to-slot"
-                            style="color: var(--primary-yellow); margin-right: 10px;"></i>Link de Voto #1</h3>
-                    <p style="color: var(--text-dim); margin-top: 5px;">Recompensa: 1x Llave Voto</p>
-                </div>
-                <div class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Votar Ahora</div>
-            </a>
+    <section class="section" style="padding-top: 0;">
+        <div class="container" style="max-width: 1100px;">
 
-            <a href="#" target="_blank" class="vote-item">
-                <div class="vote-info">
-                    <h3><i class="fa-solid fa-check-to-slot"
-                            style="color: var(--primary-yellow); margin-right: 10px;"></i>Link de Voto #2</h3>
-                    <p style="color: var(--text-dim); margin-top: 5px;">Recompensa: $500 Monedas</p>
-                </div>
-                <div class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Votar Ahora</div>
-            </a>
+            <div class="grid">
 
-            <a href="#" target="_blank" class="vote-item">
-                <div class="vote-info">
-                    <h3><i class="fa-solid fa-check-to-slot"
-                            style="color: var(--primary-yellow); margin-right: 10px;"></i>Link de Voto #3</h3>
-                    <p style="color: var(--text-dim); margin-top: 5px;">Recompensa: 1x Llave Cósmica</p>
+                <!-- Tarjeta de Voto 1 -->
+                <div class="vote-card">
+                    <span class="vote-number">1</span>
+                    <i class="fa-solid fa-gem vote-icon"></i>
+                    <h3>Vote Link #1</h3>
+                    <p style="color: var(--text-dim); margin-bottom: 20px;">Recompensa: 2x Llaves Vote</p>
+                    <a href="#" target="_blank" class="btn btn-secondary">Votar Ahora</a>
                 </div>
-                <div class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Votar Ahora</div>
-            </a>
+
+                <!-- Tarjeta de Voto 2 -->
+                <div class="vote-card">
+                    <span class="vote-number">2</span>
+                    <i class="fa-solid fa-coins vote-icon"></i>
+                    <h3>Vote Link #2</h3>
+                    <p style="color: var(--text-dim); margin-bottom: 20px;">Recompensa: 2x Llaves Vote</p>
+                    <a href="#" target="_blank" class="btn btn-secondary">Votar Ahora</a>
+                </div>
+
+                <!-- Tarjeta de Voto 3 -->
+                <div class="vote-card">
+                    <span class="vote-number">3</span>
+                    <i class="fa-solid fa-meteor vote-icon"></i>
+                    <h3>Vote Link #3</h3>
+                    <p style="color: var(--text-dim); margin-bottom: 20px;">Recompensa: 2x Llaves Vote</p>
+                    <a href="#" target="_blank" class="btn btn-secondary">Votar Ahora</a>
+                </div>
+
+            </div>
 
             <div
-                style="margin-top: 50px; text-align: center; background: var(--glass-bg); padding: 30px; border-radius: 10px;">
-                <h3 style="margin-bottom: 15px;">¿Cómo recibir mis recompensas?</h3>
-                <p>Escribe <code>/voto</code> dentro del servidor después de votar en cada página para reclamar tus
+                style="margin-top: 50px; text-align: center; background: rgba(5,5,10,0.5); padding: 30px; border-radius: 20px; border: 1px solid var(--glass-border);">
+                <i class="fa-regular fa-lightbulb"
+                    style="font-size: 2rem; color: var(--primary-yellow); margin-bottom: 15px;"></i>
+                <h3 style="margin-bottom: 10px;">¿Cómo recibir mis recompensas?</h3>
+                <p>Escribe <code>/vote</code> dentro del servidor después de votar en cada página para reclamar tus
                     premios automáticamente.</p>
             </div>
         </div>

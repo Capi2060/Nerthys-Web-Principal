@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias - Nerthys Network</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" href="../assets/logoprincipal.png">
+    <style>
+        /* Premium News Page Styles */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        /* Destacada Principal */
+        .news-card-featured {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.08) 0%, rgba(10, 10, 20, 0.8) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            min-height: 450px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .news-card-featured:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.15);
+            border-color: rgba(255, 215, 0, 0.6);
+        }
+
+        /* Efecto de brillo en fondo */
+        .news-card-featured::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 50%, rgba(255, 215, 0, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .news-card-featured .news-content {
+            padding: 60px;
+            text-align: left;
+            z-index: 2;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Tarjetas Normales */
+        .news-card {
+            background: rgba(20, 20, 30, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            transition: 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .news-card:hover {
+            background: rgba(255, 255, 255, 0.03);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .news-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-gold);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .news-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Typography & Elements */
+        .news-tag {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--primary-yellow);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .news-card-featured .news-tag {
+            background: var(--primary-yellow);
+            color: #000;
+            border: none;
+            padding: 8px 20px;
+        }
+
+        .news-date {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .news-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .news-card-featured .news-title {
+            font-size: 3rem;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .news-excerpt {
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .news-card-featured .news-excerpt {
+            font-size: 1.2rem;
+            color: #ddd;
+            max-width: 600px;
+        }
+
+        .read-more-link {
+            margin-top: auto;
+            color: var(--primary-yellow);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .read-more-link:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .news-card-featured {
+                flex-direction: column;
+                padding: 30px;
+                min-height: auto;
+            }
+
+            .news-card-featured .news-content {
+                padding: 0;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .news-card-featured .news-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* --- MODAL STYLES --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, rgba(20, 20, 30, 0.95) 0%, rgba(10, 10, 20, 0.98) 100%);
+            margin: 5% auto;
+            padding: 0;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            width: 80%;
+            max-width: 900px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .modal-header {
+            padding: 40px 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 215, 0, 0.02);
+            position: relative;
+        }
+
+        .close-modal {
+            color: #aaa;
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: var(--primary-yellow);
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 40px;
+            color: #ddd;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .modal-body h3 {
+            color: var(--primary-yellow);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-left: 3px solid var(--primary-yellow);
+            padding-left: 15px;
+        }
+
+        .modal-body p {
+            margin-bottom: 20px;
+        }
+
+        .modal-body ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        .modal-body li {
+            margin-bottom: 10px;
+        }
+
+        /* Scrollbar bonito para el modal */
+        .modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 215, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-container"></div>
+
+    <header class="hero" style="min-height: 40vh; padding-top: 150px;">
+        <div class="container">
+            <h1 class="hero-title">Últimas Noticias</h1>
+            <p class="hero-subtitle">Mantente al día con las actualizaciones y eventos del universo Nerthys.</p>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div id="news-grid-container" class="news-grid">
+                <!-- Javascript will populate this -->
+            </div>
+        </div>
+    </section>
+
+    <!-- News Modal Structure -->
+    <div id="news-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-modal">&times;</span>
+                <span id="modal-tag" class="news-tag" style="margin-bottom: 15px;">TAG</span>
+                <h2 id="modal-title" class="news-title" style="margin-bottom: 10px; font-size: 2.2rem;">Título de la
+                    Noticia</h2>
+                <div id="modal-date" class="news-date"><i class="fa-regular fa-calendar"></i> Fecha</div>
+            </div>
+            <div class="modal-body" id="modal-body-content">
+                <!-- Content injected via JS -->
+                <p>Cargando contenido...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+    <script src="../main.js"></script>
+</body>
+
+</html>
