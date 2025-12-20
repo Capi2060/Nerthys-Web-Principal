@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTabs();        // Lógica de las pestañas de reglas
     initApplyLogic();  // Lógica de las postulaciones (Nuevo)
     initRoleModals();  // Lógica de Modals de Roles
+    initServerStatus(); // Iniciar contador de jugadores - 675
 });
 
 // --- Inyección del Layout (Navbar y Footer) ---
@@ -669,4 +670,33 @@ function initRoleModals() {
             closeRoleModal();
         }
     });
+}
+
+// --- Status del Servidor (Jugadores Online) ---
+function initServerStatus() {
+    const statusText = document.getElementById('player-count');
+    const statusDot = document.querySelector('.status-dot');
+
+    if (!statusText) return;
+
+    const serverIP = "mc.nerthys.net";
+    const apiUrl = `https://api.mcsrvstat.us/2/${serverIP}`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.online) {
+                const count = data.players.online;
+                statusText.innerHTML = `<span style="color: #fff; font-weight: 700;">${count}</span> Jugadores Online`;
+                statusDot.classList.remove('offline');
+            } else {
+                statusText.innerHTML = "Servidor Offline";
+                statusDot.classList.add('offline');
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching server status:", error);
+            statusText.innerHTML = "Nerthys Network"; // Fallback elegante
+            statusDot.classList.add('offline');
+        });
 }
