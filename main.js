@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadNews();        // Cargar noticias
     initTabs();        // Lógica de las pestañas de reglas
     initApplyLogic();  // Lógica de las postulaciones (Nuevo)
+    initRoleModals();  // Lógica de Modals de Roles
 });
 
 // --- Inyección del Layout (Navbar y Footer) ---
@@ -511,5 +512,161 @@ function initAnimations() {
     document.querySelectorAll('.card, .vote-item, .section-title, .rule-category, .staff-card, .vote-card, .gallery-item').forEach(el => {
         el.style.opacity = '0';
         observer.observe(el);
+    });
+}
+
+
+function initRoleModals() {
+    const backdrop = document.getElementById('role-modal');
+    const closeBtn = document.querySelector('#role-modal .close-modal');
+    const roleButtons = document.querySelectorAll('.role-info-btn');
+
+    if (!backdrop || !closeBtn) return;
+
+    // Data definition for roles
+    const roleData = {
+        'owner': {
+            title: 'Dueño',
+            desc: 'El corazón y la mente detrás de Nerthys. Son quienes soñaron este universo y trabajan cada día para mantenerlo vivo.',
+            reason: 'Para asegurar que el proyecto tenga un rumbo claro, financiación y un futuro estable.',
+            scope: 'Todo el servidor, el staff y la comunidad entera.',
+            func: 'Toman las decisiones difíciles, pagan los servidores y diseñan la próxima gran actualización.'
+        },
+        'manager': {
+            title: 'Manager',
+            desc: 'Los directores de orquesta. Se aseguran de que cada departamento (moderación, construcción, configuración) trabaje en armonía.',
+            reason: 'Un proyecto tan grande necesita líderes que coordinen a las personas para evitar el caos.',
+            scope: 'Supervisan a Administradores y a todo el equipo de Staff.',
+            func: 'Resuelven problemas internos, organizan reuniones y optimizan el funcionamiento del equipo.'
+        },
+        'admin': {
+            title: 'Administrador',
+            desc: 'Los guardianes del orden. Tienen las herramientas para arreglar mundos rotos y la sabiduría para resolver conflictos graves.',
+            reason: 'Necesitamos gente de confianza máxima que pueda actuar rápido ante fallos técnicos o ataques.',
+            scope: 'Jugadores, mundos y el equipo de moderación.',
+            func: 'Mantienen el servidor técnico, gestionan eventos masivos y supervisan sanciones graves.'
+        },
+        'jradmin': {
+            title: 'Jr. Admin',
+            desc: 'Líderes en entrenamiento. Están demostrando que tienen la madurez para llevar las riendas del servidor en el futuro.',
+            reason: 'Para preparar a la siguiente generación de administradores y apoyar en la carga de trabajo.',
+            scope: 'Apoyo a Admins y mentoría a rangos bajos.',
+            func: 'Gestionan apelaciones complejas y aprenden a manejar herramientas avanzadas del servidor.'
+        },
+        'srmod': {
+            title: 'Sr. Mod',
+            desc: 'Los veteranos del chat. Han visto de todo y saben exactamente cómo aplicar las normas con justicia.',
+            reason: 'Los moderadores nuevos necesitan guías experimentados que les enseñen el camino.',
+            scope: 'Supervisan a Mods y Jr Mods.',
+            func: 'Revisan sanciones dudosas, trainan a los nuevos y manejan situaciones de alta tensión.'
+        },
+        'mod': {
+            title: 'Moderador',
+            desc: 'Los protectores de la paz. Están en primera línea asegurando que puedas jugar sin tóxicos ni hackers.',
+            reason: 'Para que tu experiencia de juego sea divertida y segura, libre de trampas e insultos.',
+            scope: 'El chat general y el comportamiento de los jugadores.',
+            func: 'Sancionan a quienes rompen las reglas, resuelven dudas y mantienen el ambiente limpio.'
+        },
+        'jrmod': {
+            title: 'Jr. Mod',
+            desc: 'Los aprendices dedicados. Acaban de unirse al equipo y están llenos de energía para ayudar y aprender.',
+            reason: 'Todo gran staff empieza desde abajo, aprendiendo las bases de la moderación.',
+            scope: 'Chat y reportes básicos.',
+            func: 'Observan, aprenden los comandos y ayudan con las dudas más frecuentes de los usuarios.'
+        },
+        'ayudante': {
+            title: 'Ayudante',
+            desc: 'Los amigos expertos. No están para castigar, sino para echarte una mano cuando no sabes cómo funciona algo.',
+            reason: 'A veces solo necesitas a alguien que sepa jugar bien para explicarte las cosas.',
+            scope: 'Jugadores nuevos y dudas generales.',
+            func: 'Responden preguntas en el chat y guían a los recién llegados por el servidor.'
+        },
+        'donator': {
+            title: 'Donador',
+            desc: 'Nuestros héroes sin capa. Gracias a su apoyo, podemos pagar la luz, el host y seguir mejorando Nerthys.',
+            reason: 'Para financiar el proyecto y permitir que siga siendo gratis para todos.',
+            scope: 'Disfrutan de su experiencia VIP.',
+            func: 'Lucen cosméticos increíbles, vuelan en los lobbies y disfrutan de ventajas exclusivas.'
+        }
+    };
+
+    // Open Modal
+    roleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const roleKey = btn.getAttribute('data-role');
+            const data = roleData[roleKey];
+
+            if (data) {
+                const titleEl = document.getElementById('modal-role-title');
+                if (titleEl) titleEl.textContent = data.title;
+
+                const descEl = document.getElementById('modal-role-description');
+                if (descEl) descEl.textContent = data.desc;
+
+                // Update New Fields
+                const reasonEl = document.getElementById('modal-role-reason');
+                if (reasonEl) reasonEl.textContent = data.reason;
+
+                const scopeEl = document.getElementById('modal-role-scope');
+                if (scopeEl) scopeEl.textContent = data.scope;
+
+                const funcEl = document.getElementById('modal-role-functions');
+                if (funcEl) funcEl.textContent = data.func;
+
+                // --- Dynamic Member List ---
+                const membersContainer = document.getElementById('modal-role-members');
+                if (membersContainer) {
+                    membersContainer.innerHTML = ''; // Clear previous
+
+                    // Find the section associated with this button
+                    // Logic: The button is inside a .role-header-container
+                    // The NEXT element sibling is likely the .staff-grid-centered
+                    const headerContainer = btn.closest('.role-header-container');
+                    const gridContainer = headerContainer ? headerContainer.nextElementSibling : null;
+
+                    if (gridContainer && gridContainer.classList.contains('staff-grid-centered')) {
+                        const members = gridContainer.querySelectorAll('.staff-name');
+                        if (members.length > 0) {
+                            members.forEach(member => {
+                                const name = member.textContent.trim();
+                                const tag = document.createElement('span');
+
+                                if (name.toLowerCase() === 'vacante') {
+                                    tag.className = 'member-tag member-vacant';
+                                    tag.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ¡Todavía no hay ${data.title}!`;
+                                } else {
+                                    tag.className = 'member-tag';
+                                    tag.textContent = name;
+                                }
+                                membersContainer.appendChild(tag);
+                            });
+                        } else {
+                            membersContainer.innerHTML = '<span style="color: #666; font-style: italic;">Sin miembros públicos actualmente.</span>';
+                        }
+                    } else {
+                        // Fallback in case structure changes
+                        membersContainer.innerHTML = '<span style="color: #666;">No se pudo cargar la lista.</span>';
+                    }
+                }
+
+                backdrop.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // Close Modal Logic
+    function closeRoleModal() {
+        backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeRoleModal);
+
+    // Close on click outside
+    backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) {
+            closeRoleModal();
+        }
     });
 }

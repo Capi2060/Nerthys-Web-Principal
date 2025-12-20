@@ -427,11 +427,10 @@ ul {
 .section-title {
     text-align: center;
     font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: 60px;
+
     color: var(--text-light);
     position: relative;
     display: block;
-    width: 100%;
 }
 
 .section-title::after {
@@ -519,6 +518,7 @@ ul {
     font-size: 2.5rem;
     margin-bottom: 20px;
     background: linear-gradient(to right, #fff, #ddd);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -719,15 +719,16 @@ footer {
 .staff-avatar {
     width: 120px;
     height: 120px;
-    border-radius: 50%;
+    border-radius: 12px;
     margin-bottom: 20px;
     border: 3px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     transition: 0.4s;
+    object-fit: cover;
 }
 
 .staff-card:hover .staff-avatar {
-    transform: rotate(5deg) scale(1.1);
+    transform: scale(1.05);
     border-color: var(--primary-yellow);
 }
 
@@ -736,6 +737,9 @@ footer {
     font-weight: 700;
     margin-bottom: 10px;
     color: #fff;
+    font-family: 'Minecraft', sans-serif;
+    font-weight: normal;
+    font-style: normal;
 }
 
 .role-badge {
@@ -835,8 +839,8 @@ footer {
 }
 
 .role-ayudante {
-    background: linear-gradient(135deg, #55ffff, #ccffff);
-    color: black;
+    background: linear-gradient(135deg, #0055ff, #55aaff);
+    color: white;
 }
 
 .role-donator {
@@ -1006,5 +1010,620 @@ footer {
 
     .hero-title {
         font-size: 2.8rem;
+    }
+}
+
+/* Staff Role Hover Effects */
+
+/* Capi */
+.staff-capi::before {
+    background: linear-gradient(135deg, #aa0000, #ff4444);
+}
+
+.staff-capi:hover {
+    border-color: #ff4444;
+    box-shadow: 0 15px 40px rgba(255, 68, 68, 0.3);
+}
+
+.staff-capi:hover::before {
+    opacity: 1;
+}
+
+.staff-capi:hover .staff-avatar {
+    border-color: #ff4444;
+}
+
+/* Adri */
+.staff-adri::before {
+    background: linear-gradient(135deg, #ffaa00, #ffdd00);
+}
+
+.staff-adri:hover {
+    border-color: #ffdd00;
+    box-shadow: 0 15px 40px rgba(255, 221, 0, 0.3);
+}
+
+.staff-adri:hover::before {
+    opacity: 1;
+}
+
+.staff-adri:hover .staff-avatar {
+    border-color: #ffdd00;
+}
+
+/* Erik */
+.staff-erik::before {
+    background: linear-gradient(135deg, #6600aa, #aa44ff);
+}
+
+.staff-erik:hover {
+    border-color: #aa44ff;
+    box-shadow: 0 15px 40px rgba(170, 68, 255, 0.3);
+}
+
+.staff-erik:hover::before {
+    opacity: 1;
+}
+
+.staff-erik:hover .staff-avatar {
+    border-color: #aa44ff;
+}
+
+/* Manager */
+.staff-manager::before {
+    background: linear-gradient(135deg, #880000, #aa0000);
+}
+
+.staff-manager:hover {
+    border-color: #aa0000;
+    box-shadow: 0 15px 40px rgba(170, 0, 0, 0.3);
+}
+
+.staff-manager:hover::before {
+    opacity: 1;
+}
+
+.staff-manager:hover .staff-avatar {
+    border-color: #aa0000;
+}
+
+/* Admin */
+.staff-admin::before {
+    background: linear-gradient(135deg, #cc0000, #ff5555);
+}
+
+.staff-admin:hover {
+    border-color: #ff5555;
+    box-shadow: 0 15px 40px rgba(255, 85, 85, 0.3);
+}
+
+.staff-admin:hover::before {
+    opacity: 1;
+}
+
+.staff-admin:hover .staff-avatar {
+    border-color: #ff5555;
+}
+
+/* Jr Admin */
+.staff-jradmin::before {
+    background: linear-gradient(135deg, #ff8800, #ffaa00);
+}
+
+.staff-jradmin:hover {
+    border-color: #ffaa00;
+    box-shadow: 0 15px 40px rgba(255, 170, 0, 0.3);
+}
+
+.staff-jradmin:hover::before {
+    opacity: 1;
+}
+
+.staff-jradmin:hover .staff-avatar {
+    border-color: #ffaa00;
+}
+
+/* Sr Mod */
+.staff-srmod::before {
+    background: linear-gradient(135deg, #ffcc00, #ffeebb);
+}
+
+.staff-srmod:hover {
+    border-color: #ffeebb;
+    box-shadow: 0 15px 40px rgba(255, 238, 187, 0.3);
+}
+
+.staff-srmod:hover::before {
+    opacity: 1;
+}
+
+.staff-srmod:hover .staff-avatar {
+    border-color: #ffeebb;
+}
+
+/* Mod */
+.staff-mod::before {
+    background: linear-gradient(135deg, #006600, #008800);
+}
+
+.staff-mod:hover {
+    border-color: #008800;
+    box-shadow: 0 15px 40px rgba(0, 136, 0, 0.3);
+}
+
+.staff-mod:hover::before {
+    opacity: 1;
+}
+
+.staff-mod:hover .staff-avatar {
+    border-color: #008800;
+}
+
+/* Jr Mod */
+.staff-jrmod::before {
+    background: linear-gradient(135deg, #00aa00, #55ff55);
+}
+
+.staff-jrmod:hover {
+    border-color: #55ff55;
+    box-shadow: 0 15px 40px rgba(85, 255, 85, 0.3);
+}
+
+.staff-jrmod:hover::before {
+    opacity: 1;
+}
+
+.staff-jrmod:hover .staff-avatar {
+    border-color: #55ff55;
+}
+
+/* Ayudante */
+.staff-ayudante::before {
+    background: linear-gradient(135deg, #0055ff, #55aaff);
+}
+
+.staff-ayudante:hover {
+    border-color: #55aaff;
+    box-shadow: 0 15px 40px rgba(85, 170, 255, 0.3);
+}
+
+.staff-ayudante:hover::before {
+    opacity: 1;
+}
+
+.staff-ayudante:hover .staff-avatar {
+    border-color: #55aaff;
+}
+
+/* Donator */
+.staff-donator::before {
+    background: linear-gradient(135deg, #d400d4, #ff55ff);
+}
+
+.staff-donator:hover {
+    border-color: #ff55ff;
+    box-shadow: 0 15px 40px rgba(255, 85, 255, 0.3);
+}
+
+.staff-donator:hover::before {
+    opacity: 1;
+}
+
+/* --- Role Headers & Info Buttons --- */
+.role-header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    position: relative;
+    width: 100%;
+}
+
+.section-title {
+    margin-bottom: 0 !important;
+}
+
+.role-info-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    width: 28px;
+    /* Slightly smaller/sleeker */
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 0.8rem;
+    margin-top: 4px;
+    animation: fadeInUp 0.8s ease-out forwards;
+    margin-bottom: 30px;
+    /* Optical alignment with text */
+}
+
+.role-info-btn:hover {
+    background: var(--primary-yellow);
+    color: #000;
+    box-shadow: 0 0 15px var(--primary-yellow);
+    border-color: var(--primary-yellow);
+    transform: scale(1.1);
+}
+
+/* --- Role Info Modal (Modern & Clean Design) --- */
+/* --- Role Info Modal (Premium Compact Design) --- */
+.role-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    /* Darker focus */
+    backdrop-filter: blur(12px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
+}
+
+.role-modal-backdrop.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* --- Role Info Modal (Central Dashboard Design) --- */
+.role-modal-content {
+    background: #18191a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 0;
+    width: 95%;
+    max-width: 900px;
+    /* Wider for central presence */
+    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.8);
+    transform: scale(0.95);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    /* Prevent overflow on small screens */
+}
+
+.role-modal-backdrop.active .role-modal-content {
+    transform: scale(1);
+}
+
+/* Header (Minimal) */
+.role-modal-header {
+    background: #202124;
+    padding: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#modal-role-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(90deg, #fff, #bbb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Close Button */
+.close-modal {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10;
+}
+
+.close-modal:hover {
+    background: var(--primary-yellow);
+    color: #000;
+    transform: rotate(90deg);
+}
+
+/* Body (The Grid System) */
+.role-modal-body {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    /* Sidebar | Content */
+    min-height: 400px;
+}
+
+/* Sidebar: Description & Members */
+.modal-sidebar {
+    background: #1e1f23;
+    padding: 30px;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#modal-role-description {
+    font-size: 0.95rem;
+    color: #aeaeae;
+    line-height: 1.6;
+    font-style: italic;
+    text-align: left;
+    margin: 0;
+}
+
+.modal-members-section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    /* Reset flex */
+    text-align: left;
+    flex-grow: 1;
+    /* Push to fill */
+}
+
+.modal-members-section h4 {
+    color: var(--primary-yellow);
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-members-section h4 i {
+    margin-right: 5px;
+}
+
+.members-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    flex-direction: column;
+    /* Vertical list */
+    gap: 10px;
+}
+
+.member-tag {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.member-tag::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: var(--primary-yellow);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary-yellow);
+}
+
+.member-tag:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+}
+
+.member-tag::after {
+    content: "•";
+    margin-left: 8px;
+    color: rgba(255, 255, 255, 0.2);
+    display: none;
+}
+
+.member-tag:last-child::after {
+    display: none;
+}
+
+/* Vacant Alert */
+.member-tag.member-vacant {
+    background: rgba(255, 69, 58, 0.15);
+    /* Red background */
+    color: #ff453a;
+    border: 1px solid rgba(255, 69, 58, 0.3);
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(255, 69, 58, 0.1);
+}
+
+.member-tag.member-vacant::before {
+    background: #ff453a;
+    box-shadow: 0 0 10px #ff453a;
+    animation: pulseRed 1.5s infinite;
+}
+
+@keyframes pulseRed {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+}
+
+/* Main Content: Info Grid */
+.role-modal-grid-clean {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 30px;
+    overflow-y: auto;
+}
+
+.info-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: transparent;
+    padding: 0;
+    border: none;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.2s;
+    /* Reset animations specifically for this stable layout */
+    opacity: 1;
+    animation: none;
+    transform: none;
+}
+
+.info-block:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.info-block.full-width {
+    grid-column: 1 / -1;
+    /* Span all */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+}
+
+.info-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 80px;
+    /* Fixed width for alignment */
+    text-align: center;
+    margin: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.info-header i {
+    color: var(--primary-yellow);
+    font-size: 1.4rem;
+    background: rgba(255, 255, 255, 0.05);
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+    background: none;
+    box-shadow: none;
+    width: auto;
+    height: auto;
+    color: var(--primary-yellow);
+}
+
+.info-header h4 {
+    color: #888;
+    font-size: 0.7rem;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+    color: #fff;
+    margin: 0;
+}
+
+.info-block p {
+    color: #ddd;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 5px;
+    /* Visual alignment with icon */
+    padding: 0;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+    .role-modal-body {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .role-modal-grid-clean {
+        grid-template-columns: 1fr;
     }
 }
