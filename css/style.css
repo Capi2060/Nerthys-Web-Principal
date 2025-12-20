@@ -501,33 +501,66 @@ ul {
     display: flex;
     align-items: center;
     gap: 60px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
+    padding: 50px;
+    background: rgba(20, 20, 30, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
     position: relative;
+    overflow: hidden;
+}
+
+.info-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(255, 215, 0, 0.05), transparent 60%);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.info-block:hover {
+    transform: translateY(-5px);
+    background: rgba(25, 25, 35, 0.6);
+    border-color: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
 .info-block.reverse {
     flex-direction: row-reverse;
 }
 
+.info-block.reverse::before {
+    background: radial-gradient(circle at top left, rgba(255, 215, 0, 0.05), transparent 60%);
+}
+
 .info-content {
     flex: 1;
+    z-index: 2;
 }
 
 .info-content h2 {
     text-align: left;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    background: linear-gradient(to right, #fff, #ddd);
+    font-size: 3rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 30%, var(--primary-yellow) 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.2));
 }
 
 .info-content p {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--text-dim);
-    line-height: 1.7;
-    margin-bottom: 20px;
+    line-height: 1.8;
+    margin-bottom: 25px;
 }
 
 .info-visual {
@@ -536,37 +569,56 @@ ul {
     justify-content: center;
     align-items: center;
     position: relative;
+    z-index: 2;
 }
 
 .info-visual-card {
-    background: linear-gradient(145deg, rgba(20, 20, 30, 0.8), rgba(10, 10, 15, 0.9));
-    border: 1px solid rgba(255, 215, 0, 0.1);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 30px;
-    padding: 40px;
+    padding: 0;
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     aspect-ratio: 1/1;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 5rem;
+    font-size: 6rem;
     color: var(--primary-yellow);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(5px);
+    transition: transform 0.4s ease;
 }
 
-.info-visual-card::before {
+.info-visual-card::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05), transparent 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1), transparent 70%);
+    animation: pulseGlow 4s infinite alternate;
+}
+
+.info-visual-card:hover {
+    transform: scale(1.05) rotate(2deg);
+    border-color: var(--primary-yellow);
 }
 
 .info-visual-card i {
     z-index: 2;
-    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.4));
-    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.5));
+    animation: float 5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @media (max-width: 900px) {
@@ -1500,31 +1552,8 @@ footer {
     overflow-y: auto;
 }
 
-.info-block {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    background: transparent;
-    padding: 0;
-    border: none;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 25px;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    transition: transform 0.2s;
-    /* Reset animations specifically for this stable layout */
-    opacity: 1;
-    animation: none;
-    transform: none;
-}
 
-.info-block:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.04);
-}
+
 
 .info-block.full-width {
     grid-column: 1 / -1;
