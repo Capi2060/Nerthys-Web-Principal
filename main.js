@@ -254,6 +254,8 @@ function initApplyLogic() {
     const applyBtn = document.getElementById('apply-btn');
     const statusBadge = document.getElementById('apply-status');
     const statusText = document.getElementById('status-text');
+    const openContent = document.getElementById('apply-open-content');
+    const closedNotice = document.getElementById('apply-closed-notice');
 
     // Compruebo si existe el badge para actualizar el estado visual
     if (statusBadge) {
@@ -262,11 +264,17 @@ function initApplyLogic() {
             statusBadge.innerHTML = '<i class="fa-solid fa-check"></i> ABIERTAS';
             statusText.innerHTML = "Actualmente estamos buscando nuevo personal.";
             statusText.style.color = "#4ade80"; // Verde
+
+            if (openContent) openContent.style.display = 'block';
+            if (closedNotice) closedNotice.style.display = 'none';
         } else {
             statusBadge.className = 'status-badge closed';
             statusBadge.innerHTML = '<i class="fa-solid fa-lock"></i> CERRADAS';
             statusText.innerHTML = "No estamos aceptando solicitudes por el momento.";
             statusText.style.color = "#ef4444"; // Rojo
+
+            if (openContent) openContent.style.display = 'none';
+            if (closedNotice) closedNotice.style.display = 'block';
         }
     }
 
