@@ -24,6 +24,9 @@
     <section class="section" style="padding-top: 20px;">
         <div class="container">
 
+            <!-- Staff del Mes (Moved to Modal) -->
+            <!-- Button Trigger is fixed at bottom right -->
+
             <!-- Dueños -->
             <div class="role-header-container">
                 <h2 class="section-title">Dueños</h2>
@@ -237,6 +240,47 @@
                         </div>
                         <p id="modal-role-functions">Funciones principales.</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spotlight Floating Button -->
+    <button id="spotlight-fab" class="spotlight-fab" title="Ver Staff del Mes">
+        <i class="fa-solid fa-trophy"></i>
+    </button>
+
+    <!-- Spotlight Modal -->
+    <div id="spotlight-modal" class="role-modal-backdrop">
+        <div class="role-modal-content spotlight-modal-content">
+            <span class="close-modal" id="close-spotlight">&times;</span>
+            <div class="role-modal-header" style="text-align: center; justify-content: center;">
+                <h2
+                    style="color: var(--primary-yellow); font-size: 2rem; display: flex; align-items: center; gap: 15px;">
+                    <i class="fa-solid fa-trophy"></i> STAFF DEL MES <i class="fa-solid fa-trophy"></i>
+                </h2>
+            </div>
+            <div class="role-modal-body" style="grid-template-columns: 1fr; padding: 40px;">
+                <p style="text-align: center; color: #ddd; margin-bottom: 30px; font-size: 1.1rem;">
+                    Reconocimiento especial a los miembros que han destacado por su esfuerzo y dedicación este mes.
+                </p>
+
+                <div class="spotlight-grid">
+                    <!-- Staff 1 -->
+                    <div class="card staff-card staff-spotlight-modal-card">
+                        <img src="https://mc-heads.net/avatar/MHF_Steve/120" alt="Staff del Mes" class="staff-avatar">
+                        <h3 class="staff-name">Steve</h3>
+                        <span class="role-badge role-mod">Moderador</span>
+                        <p class="spotlight-reason">"Por su constante actividad y buen trato en soporte."</p>
+                    </div>
+
+                    <!-- Staff 2 (Ejemplo)
+                    <div class="card staff-card staff-spotlight-modal-card">
+                        <img src="https://mc-heads.net/avatar/Alex/120" alt="Staff del Mes" class="staff-avatar">
+                        <h3 class="staff-name">Alex</h3>
+                        <span class="role-badge role-helper">Helper</span>
+                        <p class="spotlight-reason">"Por reportar bugs críticos y ayudar en eventos."</p>
+                    </div> -->
                 </div>
             </div>
         </div>

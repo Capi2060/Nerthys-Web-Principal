@@ -7,6 +7,8 @@
 const APPLICATIONS_OPEN = false; // <--- CAMBIAR ESTO A true PARA ABRIR LAS POSTULACIONES o a false PARA CERRARLAS
 const FORM_URL = "https://forms.google.com/tu-formulario"; // Poner aquí el link del formulario de postulaciones
 
+// En la linea 1003 se activa o desactiva la aparicion del staff del mes - true para mostrarlo y false para ocultarlo
+
 document.addEventListener('DOMContentLoaded', () => {
     initLayout();      // Cargar Navbar y Footer
     initAnimations();  // Iniciar animaciones de scroll
@@ -15,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initApplyLogic();  // Lógica de las postulaciones (Nuevo)
     initRoleModals();  // Lógica de Modals de Roles
     initServerStatus(); // Iniciar contador de jugadores - 675
+    initRulesSearch(); // Buscador de reglas
+    initSpotlightModal(); // Staff del mes (FAB)
 });
 
 // --- Inyección del Layout (Navbar y Footer) ---
@@ -63,8 +67,55 @@ function initLayout() {
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>Tienda</span>
                 </a>
+
+                <!-- Settings Trigger -->
+                <div class="nav-separator"></div>
+                <button id="settings-trigger" class="nav-pill-item" style="background: transparent; border: none; cursor: pointer;">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
             </div>
         `;
+
+        // Inject Settings Modal HTML to Body if not exists
+        if (!document.getElementById('settings-modal')) {
+            const modalHTML = `
+                <div id="settings-modal" class="settings-modal-backdrop">
+                    <div class="settings-modal-content">
+                        <div class="settings-header">
+                            <h3><i class="fa-solid fa-sliders"></i> Ajustes</h3>
+                            <button id="close-settings" class="close-icon"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div class="settings-body">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-name">Efectos de Partículas</span>
+                                    <span class="setting-desc">Estela de polvo estelar al mover el mouse</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-particles" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <span class="setting-name">Cursor Personalizado</span>
+                                    <span class="setting-desc">Usar el cursor exclusivo de Nerthys</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-cursor">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+
+        // Init Settings Logic
+        initSettingsLogic();
+        initMouseParticles();
 
         // Lógica para marcar el enlace activo y mover el highlight
         const currentFile = window.location.pathname.split('/').pop() || 'index.html';
@@ -699,4 +750,280 @@ function initServerStatus() {
             statusText.innerHTML = "Nerthys Network"; // Fallback elegante
             statusDot.classList.add('offline');
         });
+}
+
+// --- Sistema de Ajustes Globales ---
+function initSettingsLogic() {
+    const trigger = document.getElementById('settings-trigger');
+    const modal = document.getElementById('settings-modal');
+    const closeBtn = document.getElementById('close-settings');
+    const musicToggle = document.getElementById('setting-music');
+    const particlesToggle = document.getElementById('setting-particles');
+    const cursorToggle = document.getElementById('setting-cursor');
+    const audio = document.getElementById('bg-music');
+
+    // Load Saved Preferences
+    const savedMusic = localStorage.getItem('nerthys_music') === 'true';
+    const savedParticles = localStorage.getItem('nerthys_particles') === 'true'; // Default false
+    const savedCursor = localStorage.getItem('nerthys_cursor') === 'true'; // Default false
+
+    if (musicToggle) musicToggle.checked = savedMusic;
+    if (particlesToggle) particlesToggle.checked = savedParticles;
+    if (cursorToggle) cursorToggle.checked = savedCursor;
+
+    // Apply Initial States
+    if (savedMusic && audio) {
+        // Browser might block autoplay, handled by user interaction event in a real scenario
+        // For now, we try play if user accepted.
+        try { audio.play(); audio.volume = 0.3; } catch (e) { console.log("Autoplay blocked"); }
+    }
+    if (savedCursor) document.body.classList.add('enable-custom-cursor');
+    else document.body.classList.remove('enable-custom-cursor');
+
+    // Toggle Logic
+    if (musicToggle) {
+        musicToggle.addEventListener('change', (e) => {
+            const isChecked = e.target.checked;
+            localStorage.setItem('nerthys_music', isChecked);
+            if (isChecked) {
+                audio.play().catch(e => showToast("Haz click en la página para activar audio", "warning"));
+                audio.volume = 0.3;
+            } else {
+                audio.pause();
+            }
+        });
+    }
+
+    if (particlesToggle) {
+        particlesToggle.addEventListener('change', (e) => {
+            localStorage.setItem('nerthys_particles', e.target.checked);
+            // Reload mostly required for canvas removal cleanly, or check flag in animate loop
+        });
+    }
+
+    if (cursorToggle) {
+        cursorToggle.addEventListener('change', (e) => {
+            const isChecked = e.target.checked;
+            localStorage.setItem('nerthys_cursor', isChecked);
+            if (isChecked) {
+                document.body.classList.add('enable-custom-cursor');
+            } else {
+                document.body.classList.remove('enable-custom-cursor');
+            }
+        });
+    }
+
+    // Modal Visibility
+    if (trigger && modal && closeBtn) {
+        trigger.addEventListener('click', () => {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+}
+
+
+
+// --- Comet Trail Particles (Mouse) ---
+function initMouseParticles() {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'particle-canvas';
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '9999';
+    document.body.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    const trail = [];
+    const particles = []; // Explosion particles
+
+    window.addEventListener('resize', () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+    });
+
+    // Add particle on movement
+    window.addEventListener('mousemove', (e) => {
+        if (localStorage.getItem('nerthys_particles') !== 'true') return;
+        // Subtle Trail: Smaller, more frequent but transparent
+        trail.push({
+            x: e.clientX,
+            y: e.clientY,
+            life: 1.0,
+            size: Math.random() * 2 + 1 // Random size between 1 and 3
+        });
+    });
+
+    // Click Explosion
+    window.addEventListener('mousedown', (e) => {
+        if (localStorage.getItem('nerthys_particles') !== 'true') return;
+        for (let i = 0; i < 12; i++) { // Fewer particles
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 2 + 0.5; // Slower explosion
+            particles.push({
+                x: e.clientX,
+                y: e.clientY,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                life: 1.0,
+                color: Math.random() > 0.6 ? '#FFD700' : 'rgba(255, 255, 255, 0.5)'
+            });
+        }
+    });
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        if (localStorage.getItem('nerthys_particles') !== 'true') {
+            requestAnimationFrame(animate);
+            return;
+        }
+
+        // Draw Comet Trail
+        for (let i = 0; i < trail.length; i++) {
+            const p = trail[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+            // Lower opacity (0.4 max) for subtlety
+            ctx.fillStyle = `rgba(255, 215, 0, ${p.life * 0.4})`;
+            ctx.fill();
+            p.life -= 0.05; // Short tail
+        }
+
+        // Draw Explosion Particles
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life -= 0.02;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = p.color === '#FFD700'
+                ? `rgba(255, 215, 0, ${p.life})`
+                : `rgba(255, 255, 255, ${p.life})`;
+            ctx.fill();
+        }
+
+        // Cleanup
+        for (let i = trail.length - 1; i >= 0; i--) {
+            if (trail[i].life <= 0) trail.splice(i, 1);
+        }
+        for (let i = particles.length - 1; i >= 0; i--) {
+            if (particles[i].life <= 0) particles.splice(i, 1);
+        }
+
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+
+
+// --- Rules Search Logic ---
+function initRulesSearch() {
+    const searchInput = document.getElementById('rules-search');
+    const ruleCards = document.querySelectorAll('.rule-card');
+
+    // Solo si estamos en la página de reglas
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase().trim();
+
+        ruleCards.forEach(card => {
+            const title = card.querySelector('.rule-title').innerText.toLowerCase();
+            const desc = card.querySelector('.rule-desc').innerText.toLowerCase();
+            const parentCategory = card.closest('.rule-category');
+
+            if (title.includes(term) || desc.includes(term)) {
+                card.style.display = 'block';
+                // Animación suave de entrada
+                card.style.animation = 'fadeInUp 0.3s ease forwards';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Ocultar categorías vacías si se desea (Opcional, pero queda mejor)
+        document.querySelectorAll('.rule-category').forEach(cat => {
+            const visibleCards = cat.querySelectorAll('.rule-card[style="display: block;"]');
+            const allCards = cat.querySelectorAll('.rule-card');
+
+            // Si el término está vacío, mostrar todo
+            if (term === '') {
+                cat.style.display = 'block';
+                return;
+            }
+
+            // Simple check: si todas las cards internas están ocultas, ocultar la categoría
+            // Nota: Este check es básico. Una mejor implementación comprobaría el computed style.
+            // Para simplificar: asumimos que si hemos puesto display:none a todas, ocultamos la cat.
+
+            let anyVisible = false;
+            allCards.forEach(c => {
+                if (c.style.display !== 'none') anyVisible = true;
+            });
+
+            cat.style.display = anyVisible ? 'block' : 'none';
+        });
+    });
+}
+
+// --- Spotlight Modal Logic (Staff del Mes) ---
+function initSpotlightModal() {
+    const fab = document.getElementById('spotlight-fab');
+    const modal = document.getElementById('spotlight-modal');
+    const closeBtn = document.getElementById('close-spotlight');
+
+    // CONFIGURACIÓN: Cambiar a 'true' cuando haya staff del mes
+    const HAS_SPOTLIGHT_MEMBERS = false;
+
+    if (!fab || !modal || !closeBtn) return;
+
+    // Si no hay staff, ocultar todo
+    if (!HAS_SPOTLIGHT_MEMBERS) {
+        fab.style.display = 'none';
+        return;
+    }
+
+    function openModal() {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    fab.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
 }
