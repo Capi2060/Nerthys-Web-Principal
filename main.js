@@ -7,7 +7,7 @@
 const APPLICATIONS_OPEN = false; // <--- CAMBIAR ESTO A true PARA ABRIR LAS POSTULACIONES o a false PARA CERRARLAS
 const FORM_URL = "https://forms.google.com/tu-formulario"; // Poner aquí el link del formulario de postulaciones
 
-// En la linea 1003 se activa o desactiva la aparicion del staff del mes - true para mostrarlo y false para ocultarlo
+// En la linea 1005 se activa o desactiva la aparicion del staff del mes - true para mostrarlo y false para ocultarlo
 
 document.addEventListener('DOMContentLoaded', () => {
     initLayout();      // Cargar Navbar y Footer
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTabs();        // Lógica de las pestañas de reglas
     initApplyLogic();  // Lógica de las postulaciones (Nuevo)
     initRoleModals();  // Lógica de Modals de Roles
-    initServerStatus(); // Iniciar contador de jugadores - 675
+    initServerStatus(); // Iniciar contador de jugadores - 735
     initRulesSearch(); // Buscador de reglas
     initSpotlightModal(); // Staff del mes (FAB)
 });
@@ -32,8 +32,9 @@ function initLayout() {
     const navbarContainer = document.getElementById('navbar-container');
     if (navbarContainer) {
         navbarContainer.innerHTML = `
+            <!-- Desktop Pill Navbar -->
             <div class="nav-pill-container">
-                <div class="nav-highlight"></div> <!-- Elemento mágico deslizante -->
+                <div class="nav-highlight"></div> 
                 
                 <a href="${basePath}index.html" class="nav-pill-item" data-page="index.html">
                     <i class="fa-solid fa-house"></i>
@@ -68,11 +69,37 @@ function initLayout() {
                     <span>Tienda</span>
                 </a>
 
-                <!-- Settings Trigger -->
+                <!-- Settings Trigger (Desktop) -->
                 <div class="nav-separator"></div>
                 <button id="settings-trigger" class="nav-pill-item" style="background: transparent; border: none; cursor: pointer;">
                     <i class="fa-solid fa-gear"></i>
                 </button>
+            </div>
+
+            <!-- Mobile Navbar Trigger -->
+            <button id="mobile-menu-btn" class="mobile-nav-trigger">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Mobile Menu Overlay -->
+            <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+                <button id="mobile-menu-close" class="mobile-close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <div class="mobile-nav-links">
+                    <a href="${basePath}index.html" class="mobile-nav-item">Inicio</a>
+                    <a href="${pagesPath}news.html" class="mobile-nav-item">Noticias</a>
+                    <a href="${pagesPath}vote.html" class="mobile-nav-item">Votar</a>
+                    <a href="${pagesPath}rules.html" class="mobile-nav-item">Reglas</a>
+                    <a href="${pagesPath}apply.html" class="mobile-nav-item">Postulaciones</a>
+                    <a href="${pagesPath}staff.html" class="mobile-nav-item">Equipo</a>
+                    <a href="https://tienda.nerthys.net" target="_blank" class="mobile-nav-item" style="color: var(--primary-yellow);">Tienda</a>
+                </div>
+                
+                 <!-- Mobile Settings Trigger -->
+                 <div style="margin-top: 30px;">
+                    <button id="mobile-settings-trigger" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;">
+                        <i class="fa-solid fa-gear"></i> Ajustes
+                    </button>
+                 </div>
             </div>
         `;
 
@@ -196,6 +223,9 @@ function initLayout() {
         window.addEventListener('resize', () => {
             if (currentTarget) moveHighlight(currentTarget);
         });
+
+        // Init Mobile Menu Logic
+        initMobileMenu();
     }
 
     // Inyectar el Footer
@@ -217,6 +247,34 @@ function initLayout() {
         `;
     }
 }
+
+function initMobileMenu() {
+    const trigger = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('mobile-menu-close');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const links = document.querySelectorAll('.mobile-nav-item');
+
+    if (!trigger || !overlay) return;
+
+    function openMenu() {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Block scroll
+    }
+
+    function closeMenu() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = ''; // Release scroll
+    }
+
+    trigger.addEventListener('click', openMenu);
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+    // Close when clicking a link
+    links.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+}
+
 
 // --- Lógica de Pestañas (Reglas) ---
 function initTabs() {
@@ -763,12 +821,33 @@ function initServerStatus() {
 // --- Sistema de Ajustes Globales ---
 function initSettingsLogic() {
     const trigger = document.getElementById('settings-trigger');
+    const mobileTrigger = document.getElementById('mobile-settings-trigger'); // New
     const modal = document.getElementById('settings-modal');
     const closeBtn = document.getElementById('close-settings');
     const musicToggle = document.getElementById('setting-music');
     const particlesToggle = document.getElementById('setting-particles');
     const cursorToggle = document.getElementById('setting-cursor');
     const audio = document.getElementById('bg-music');
+
+    function openSettings() {
+        if (modal) {
+            modal.classList.add('active');
+            // Close mobile menu if open
+            const mobileOverlay = document.getElementById('mobile-menu-overlay');
+            if (mobileOverlay) {
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+    }
+
+    function closeSettings() {
+        if (modal) modal.classList.remove('active');
+    }
+
+    if (trigger) trigger.addEventListener('click', openSettings);
+    if (mobileTrigger) mobileTrigger.addEventListener('click', openSettings); // Event for mobile
+    if (closeBtn) closeBtn.addEventListener('click', closeSettings);
 
     // Load Saved Preferences
     const savedMusic = localStorage.getItem('nerthys_music') === 'true';
