@@ -494,9 +494,9 @@ ul {
     content: '';
     display: block;
     width: 60px;
-    height: 4px;
+    height: 5px;
     background: var(--primary-yellow);
-    margin: 15px auto 0;
+    margin: 10px auto 0;
     border-radius: 2px;
 }
 
