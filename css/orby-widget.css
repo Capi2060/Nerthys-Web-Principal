@@ -1,0 +1,310 @@
+/* --- ORBY GLOBAL WIDGET (JARVIS STYLE) --- */
+
+:root {
+    --orby-gold: #FFD700;
+    --orby-gold-glow: rgba(255, 215, 0, 0.4);
+    --orby-dark: #0a0a1a;
+    --orby-glass: rgba(15, 15, 35, 0.85);
+    --orby-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Floating Trigger Button */
+.orby-widget-trigger {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    background: var(--orby-glass);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--orby-gold);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px var(--orby-gold-glow);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: orbyPulse 3s infinite;
+}
+
+.orby-widget-trigger:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 0 50px var(--orby-gold);
+}
+
+.orby-widget-trigger img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+@keyframes orbyPulse {
+    0% {
+        box-shadow: 0 0 20px var(--orby-gold-glow);
+    }
+
+    50% {
+        box-shadow: 0 0 40px var(--orby-gold);
+    }
+
+    100% {
+        box-shadow: 0 0 20px var(--orby-gold-glow);
+    }
+}
+
+/* Chat Container */
+.orby-widget-container {
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    width: 400px;
+    height: 550px;
+    background: var(--orby-glass);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--orby-border);
+    border-radius: 30px;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+    transform: translateY(30px) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    /* Fallback de seguridad */
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.orby-widget-container.active {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+}
+
+/* Header */
+.orby-widget-header {
+    padding: 20px 25px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--orby-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.orby-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.orby-header-info img {
+    width: 35px;
+    height: 35px;
+}
+
+.orby-header-info span {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.orby-close-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.orby-close-btn:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+/* Chat Area */
+.orby-widget-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--orby-gold) transparent;
+}
+
+.orby-widget-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.orby-widget-messages::-webkit-scrollbar-thumb {
+    background: var(--orby-gold);
+    border-radius: 10px;
+}
+
+.orby-msg {
+    max-width: 85%;
+    padding: 12px 18px;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.orby-msg.bot {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--orby-border);
+    border-bottom-left-radius: 2px;
+    color: #eee;
+}
+
+.orby-msg.user {
+    align-self: flex-end;
+    background: var(--orby-gold);
+    color: #000;
+    font-weight: 600;
+    border-bottom-right-radius: 2px;
+}
+
+/* Suggestions Area */
+.orby-widget-suggestions {
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.orby-pill {
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--orby-gold-glow);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.orby-pill:hover {
+    background: var(--orby-gold-glow);
+    color: #fff;
+    border-color: var(--orby-gold);
+}
+
+/* Input Area */
+.orby-widget-input {
+    padding: 15px 20px;
+    display: flex;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.orby-input-wrapper {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--orby-border);
+    border-radius: 25px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+}
+
+.orby-input-wrapper input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 10px 0;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.orby-btn-send {
+    width: 40px;
+    height: 40px;
+    background: var(--orby-gold);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    transition: 0.3s;
+}
+
+.orby-btn-send:hover {
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* Typing Indicator */
+.orby-typing-dots {
+    display: none;
+    gap: 5px;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.orby-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--orby-gold);
+    border-radius: 50%;
+    animation: orbyDot 1.4s infinite;
+    opacity: 0.6;
+}
+
+.orby-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.orby-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes orbyDot {
+
+    0%,
+    100% {
+        transform: scale(0.8);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Hidden elements on mobile to avoid cluttering */
+@media (max-width: 480px) {
+    .orby-widget-container {
+        width: calc(100% - 40px);
+        right: 20px;
+        left: 20px;
+        height: 70vh;
+    }
+}
+
+/* Footer Notice */
+.orby-widget-footer {
+    padding: 8px 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid var(--orby-border);
+    text-align: center;
+}
+
+.orby-widget-footer i {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    display: block;
+    line-height: 1.2;
+}

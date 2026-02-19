@@ -9,6 +9,9 @@ const FORM_URL = "https://forms.google.com/tu-formulario"; // Poner aquí el lin
 
 // En la linea 1005 se activa o desactiva la aparicion del staff del mes - true para mostrarlo y false para ocultarlo
 
+// --- CONFIGURACIÓN DE ORBY ---
+const ORBY_SEASON = "base"; // Opciones: base, verano, invierno, navidad, sanvalentin, halloween, añonuevo, pascua
+
 document.addEventListener('DOMContentLoaded', () => {
     initLayout();      // Cargar Navbar y Footer
     initAnimations();  // Iniciar animaciones de scroll
@@ -19,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initServerStatus(); // Iniciar contador de jugadores - 735
     initRulesSearch(); // Buscador de reglas
     initSpotlightModal(); // Staff del mes (FAB)
+    initOrbyWidget();     // Iniciar Orby Global Widget (Nuevo)
 });
 
 // --- Inyección del Layout (Navbar y Footer) ---
@@ -1113,4 +1117,188 @@ function initSpotlightModal() {
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
+}
+
+// --- ORBY GLOBAL WIDGET LOGIC ---
+function initOrbyWidget() {
+    const isPagesDir = window.location.pathname.includes('/pages/');
+    const basePath = isPagesDir ? '../' : './';
+
+    // Inyectar CSS si no existe
+    if (!document.getElementById('orby-widget-css')) {
+        const link = document.createElement('link');
+        link.id = 'orby-widget-css';
+        link.rel = 'stylesheet';
+        link.href = `${basePath}css/orby-widget.css`;
+        document.head.appendChild(link);
+    }
+
+    // Inyectar HTML del Widget
+    const widgetHTML = `
+        <div class="orby-widget-trigger" id="orby-trigger">
+            <img src="${basePath}assets/Orby-Normal.png" alt="Orby" id="orby-trigger-img">
+        </div>
+
+        <div class="orby-widget-container" id="orby-chat-container" style="display: none;">
+            <div class="orby-widget-header">
+                <div class="orby-header-info">
+                    <img src="${basePath}assets/Orby-Normal.png" alt="Orby" id="orby-header-img">
+                    <span>ORBY AI</span>
+                </div>
+                <button class="orby-close-btn" id="orby-close-chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="orby-widget-messages" id="orby-messages">
+                <div class="orby-msg bot">
+                    ¡Hola! Soy <strong>Orby</strong>, el asistente oficial de Nerthys. ¿En qué puedo ayudarte hoy? ✨
+                </div>
+            </div>
+
+            <div class="orby-typing-dots" id="orby-typing">
+                <div class="orby-dot"></div>
+                <div class="orby-dot"></div>
+                <div class="orby-dot"></div>
+            </div>
+
+            <div class="orby-widget-suggestions">
+                <div class="orby-pill">¿Cuál es la IP?</div>
+                <div class="orby-pill">¿Qué rangos hay?</div>
+                <div class="orby-pill">Dime las reglas</div>
+            </div>
+
+            <div class="orby-widget-input">
+                <div class="orby-input-wrapper">
+                    <input type="text" id="orby-user-input" placeholder="Pregúntame algo..." autocomplete="off">
+                </div>
+                <button class="orby-btn-send" id="orby-send">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+
+            <div class="orby-widget-footer">
+                <i>Estoy en mis primeras versiones y no tengo toda la información, si tienes dudas que no puedo responder abre un ticket en discord.</i>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', widgetHTML);
+
+    const trigger = document.getElementById('orby-trigger');
+    const container = document.getElementById('orby-chat-container');
+    const closeBtn = document.getElementById('orby-close-chat');
+    const input = document.getElementById('orby-user-input');
+    const sendBtn = document.getElementById('orby-send');
+    const messagesBox = document.getElementById('orby-messages');
+    const typing = document.getElementById('orby-typing');
+    const pills = document.querySelectorAll('.orby-pill');
+    const triggerImg = document.getElementById('orby-trigger-img');
+    const headerImg = document.getElementById('orby-header-img');
+
+    // Sincronizar Skin con Temporada
+    const currentSkin = typeof ORBY_SEASON !== 'undefined' ? ORBY_SEASON : 'base';
+    const skinMap = {
+        base: 'Orby-Normal.png', verano: 'Orby-Verano.png', invierno: 'Orby-Invierno.png',
+        navidad: 'Orby-Navidad.png', sanvalentin: 'Orby-SanValentin.png',
+        halloween: 'Orby-Halloween.png', añonuevo: 'Orby-AñoNuevo.png', pascua: 'Orby-Pascua.png'
+    };
+    if (skinMap[currentSkin]) {
+        triggerImg.src = `${basePath}assets/${skinMap[currentSkin]}`;
+        headerImg.src = `${basePath}assets/${skinMap[currentSkin]}`;
+    }
+
+    // --- Lógica del Chat ---
+    const API_KEY = "AIzaSyBVOejO1hI_W4NvzbfofqmkutL3lkx2u7c";
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+
+    // CONOCIMIENTO INTEGRADO (USER DATA)
+    const ORBY_KNOWLEDGE = `
+        Eres Orby, la IA oficial de Nerthys Network. Tono: Jarvis (elegante, preciso y directo).
+        Responde siempre en español. Si no sabes algo, indica al usuario que abra un Ticket en Discord.
+
+        --- INFO GENERAL Y NORMATIVAS ---
+        - IP: mc.nerthys.net (P: 19132) | Discord: discord.gg/nerthys
+        - Normas: Prohibido grifear, TPA Kill, hacks, toxicidad y RMT. SS obligatoria si se pide.
+        - Staff Autoritario: CAPII_MC, 1EL_ADRII, ERIK_1128 (Dueños), ZOYMART (Admin).
+
+        --- TIENDA Y RANGOS ---
+        - web: tienda.nerthys.net (50% descuento apertura).
+        - Rangos: Vidente (4.99e), Etero (7.99e), Sideral (12.99e), Celestial (17.99e), Espectral (24.99e), Destello (32.99e), Cosmico (39.99e), Atemporal (49.99e).
+        - Atemporal: Homes ILIMITADOS y /fly global. Cosmico: /fly Overworld.
+
+        --- PREGUNTAS FRECUENTES ---
+        - ¿Premium? Sí, solo cuentas originales.
+        - ¿Versión? 1.20 - 1.21.
+        - ¿Economy? Jobs, misiones y /ah.
+        - ¿Mundo Recursos? /warp recursos (obligatorio para farmear).
+    `;
+
+    function toggleChat() {
+        if (!container.classList.contains('active')) {
+            container.style.display = 'flex';
+            // Delay para que el navegador procese el cambio de display antes de animar
+            setTimeout(() => container.classList.add('active'), 10);
+        } else {
+            container.classList.remove('active');
+            // Ocultar completamente tras la animación (0.5s en CSS)
+            setTimeout(() => {
+                if (!container.classList.contains('active')) {
+                    container.style.display = 'none';
+                }
+            }, 500);
+        }
+    }
+    trigger.addEventListener('click', toggleChat);
+    closeBtn.addEventListener('click', toggleChat);
+
+    function addMsg(text, type) {
+        const div = document.createElement('div');
+        div.className = `orby-msg ${type}`;
+        div.innerHTML = text;
+        messagesBox.appendChild(div);
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+    }
+
+    async function processQuery(query) {
+        typing.style.display = 'flex';
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+
+        try {
+            const resp = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: `INSTRUCCIONES: ${ORBY_KNOWLEDGE}\n\nPREGUNTA: ${query}` }] }]
+                })
+            });
+            const data = await resp.json();
+            typing.style.display = 'none';
+
+            if (data.candidates && data.candidates[0].content) {
+                let reply = data.candidates[0].content.parts[0].text;
+                reply = reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+                addMsg(reply, 'bot');
+            } else {
+                addMsg("Lo siento, no puedo procesar eso ahora mismo. Inténtalo de nuevo.", 'bot');
+            }
+        } catch (e) {
+            typing.style.display = 'none';
+            addMsg("He perdido la conexión con mis servidores estelares. Prueba en un momento.", 'bot');
+        }
+    }
+
+    function handleInput() {
+        const text = input.value.trim();
+        if (!text) return;
+        addMsg(text, 'user');
+        input.value = '';
+        processQuery(text);
+    }
+
+    sendBtn.addEventListener('click', handleInput);
+    input.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleInput(); });
+    pills.forEach(p => p.addEventListener('click', () => {
+        input.value = p.innerText;
+        handleInput();
+    }));
 }
